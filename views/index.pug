@@ -2,4 +2,50 @@ extends layout
 
 block content
   h1= title
+  script(src='/javascripts/bootstrap.bundle.min.js')
   p Welcome to #{title}
+  div
+  div
+  div
+  form
+    // Name | Text input
+    .form-group.row
+      label.col-md-4.col-form-label(for="name") Name
+      .col-md-4
+        input#name.form-control.input-md(
+          required=""
+          placeholder="name"
+          type="text"
+          name="name"
+          aria-describedby="nameHelpBlock"
+          )
+        small#nameHelpBlock.text-muted your name
+    // Age | Text input
+    .form-group.row
+      label.col-md-4.col-form-label(for="age") Age
+      .col-md-4
+        input#age.form-control.input-md(
+          required=""
+          placeholder="age"
+          type="text"
+          name="age"
+          aria-describedby="ageHelpBlock"
+          )
+        small#ageHelpBlock.text-muted your age
+    // Comment | Text input
+    .form-group.row
+      label.col-md-4.col-form-label(for="comment") Comment
+      .col-md-4
+        input#comment.form-control.input-md(
+          placeholder="comment"
+          type="text"
+          name="comment"
+          aria-describedby="commentHelpBlock"
+          )
+        small#commentHelpBlock.text-muted optional comment
+    // | Button
+    .form-group.row
+      label.col-md-4.col-form-label(for="submit")
+      .col-md-4
+        button#submit.btn.btn-primary(name="submit") Submit
+
