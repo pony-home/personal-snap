@@ -6,44 +6,18 @@ block content
   p Welcome to #{title}
 
   form
-    // Name | Text input
-    .form-group.row
-      label.col-md-4.col-form-label(for="name") Name
-      .col-md-4
-        input#name.form-control.input-md(
-          required=""
-          placeholder="name"
-          type="text"
-          name="name"
-          aria-describedby="nameHelpBlock"
-          )
-        small#nameHelpBlock.text-muted your name
-    // Age | Text input
-    .form-group.row
-      label.col-md-4.col-form-label(for="age") Age
-      .col-md-4
-        input#age.form-control.input-md(
-          required=""
-          placeholder="age"
-          type="text"
-          name="age"
-          aria-describedby="ageHelpBlock"
-          )
-        small#ageHelpBlock.text-muted your age
-    // Comment | Text input
-    .form-group.row
-      label.col-md-4.col-form-label(for="comment") Comment
-      .col-md-4
-        input#comment.form-control.input-md(
-          placeholder="comment"
-          type="text"
-          name="comment"
-          aria-describedby="commentHelpBlock"
-          )
-        small#commentHelpBlock.text-muted optional comment
-    // | Button
-    .form-group.row
-      label.col-md-4.col-form-label(for="submit")
-      .col-md-4
-        button#submit.btn.btn-primary(name="submit") Submit
-
+    .form-group
+      label(for="name") Name
+      input#name.form-control(
+        aria-describedby="nameHelp"
+        type="text"
+        )
+      small#nameHelp.form-text.text-muted Your name
+    .form-group
+      label(for="surname") Surname
+      input#surname.form-control(
+        aria-describedby="surnameHelp"
+        type="text"
+        )
+      small#surnameHelp.form-text.text-muted Your surname
+    button.btn.btn-primary(type="submit") Submit
