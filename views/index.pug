@@ -1,27 +1,9 @@
 extends layout
 
 block content
-  h1= title
+  h1 Annual snapshot
   script(src='/javascripts/bootstrap.bundle.min.js')
-  p Welcome to #{title}
 
-  form(
-    method="post"
-    )
-    .form-group
-      label(for="name") Name
-      input#name.form-control(
-        aria-describedby="nameHelp"
-        type="text"
-        name="name"
-        )
-      small#nameHelp.form-text.text-muted Your name
-    .form-group
-      label(for="surname") Surname
-      input#surname.form-control(
-        aria-describedby="surnameHelp"
-        type="text"
-        name="surname"
-        )
-      small#surnameHelp.form-text.text-muted Your surname
+  form(method="post")
+    include physical_health
     button.btn.btn-primary(type="submit") Submit
