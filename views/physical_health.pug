@@ -1,25 +1,27 @@
 .form-group.mb-3.col-sm-10
       h3 Health
+
       .input-group
-        span#blood-pressure-sp.input-group-text.col-sm-4 Blood pressure
+        span#blood-pressure-sp.input-group-text.col-sm-5 Blood pressure
         input#blood-pressure.form-control(
           aria-describedby="blood-pressure" 
           type="text"
+          name="bloodpressure"
         )
         .input-group
-        span#blood-chol-sp.input-group-text.col-sm-4 Blood cholesterol
+        span#blood-chol-sp.input-group-text.col-sm-5 Blood cholesterol
         input#blood-chol.form-control(
           aria-describedby="blood-chol" 
           type="text"
         )
         .input-group
-        span#blood-glucose-sp.input-group-text.col-sm-4 Blood glucose
+        span#blood-glucose-sp.input-group-text.col-sm-5 Blood glucose
         input#blood-glucose.form-control(
           aria-describedby="blood-glucose" 
           type="text"
         )
         .input-group
-        span#body-fat-sp.input-group-text.col-sm-4 Body fat, %
+        span#body-fat-sp.input-group-text.col-sm-5 Body fat, %
         input#body-fat.form-control(
           aria-describedby="body-fat" 
           type="text"
@@ -29,18 +31,25 @@
           option(value="1") Calipper
           option(value="2") DEXA scan
           option(value="3") Home weight
+          
+        .input-group
+        span#vo2max-sp.input-group-text.col-sm-5 VO2max
+        input#vo2max.form-control(
+          aria-describedby="vo2max" 
+          type="text"
+        )
 
 .form-group.mb-3.col-sm-10
-    h3 Aesthetic
+    h4 Aesthetic
 
       .input-group
-        span#height-sp.input-group-text.col-sm-4 Height, cm
+        span#height-sp.input-group-text.col-sm-5 Height, cm
         input#height.form-control(
           aria-describedby="height" 
           type="text"
         )
         .input-group
-        span#weight-sp.input-group-text.col-sm-4 Weight, kg
+        span#weight-sp.input-group-text.col-sm-5 Weight, kg
         input#weight.form-control(
           aria-describedby="weight" 
           type="text"
@@ -50,43 +59,43 @@
     h6 Body circumferences
 
     .input-group
-        span#neck-sp.input-group-text.col-sm-4 Neck, cm
+        span#neck-sp.input-group-text.col-sm-5 Neck, cm
         input#neck.form-control(
           aria-describedby="neck" 
           type="text"
         )
         .input-group
-        span#chest-sp.input-group-text.col-sm-4 Chest, cm
+        span#chest-sp.input-group-text.col-sm-5 Chest, cm
         input#chest.form-control(
           aria-describedby="chest" 
           type="text"
         )
         .input-group
-        span#arm-sp.input-group-text.col-sm-4 Arm, cm
+        span#arm-sp.input-group-text.col-sm-5 Arm, cm
         input#arm.form-control(
           aria-describedby="arm" 
           type="text"
         )
         .input-group
-        span#waist-sp.input-group-text.col-sm-4 Waist, cm
+        span#waist-sp.input-group-text.col-sm-5 Waist, cm
         input#waist.form-control(
           aria-describedby="waist" 
           type="text"
         )
         .input-group
-        span#hips-sp.input-group-text.col-sm-4 Hips, cm
+        span#hips-sp.input-group-text.col-sm-5 Hips, cm
         input#hips.form-control(
           aria-describedby="hips" 
           type="text"
         )
         .input-group
-        span#thigh-sp.input-group-text.col-sm-4 Thigh, cm
+        span#thigh-sp.input-group-text.col-sm-5 Thigh, cm
         input#thigh.form-control(
           aria-describedby="thigh" 
           type="text"
         )
         .input-group
-        span#calf-sp.input-group-text.col-sm-4 Calf, cm
+        span#calf-sp.input-group-text.col-sm-5 Calf, cm
         input#calf.form-control(
           aria-describedby="calf" 
           type="text"
@@ -95,29 +104,29 @@
     h6 Skin quality
 
        .input-group
-        span#face-skin-sp.input-group-text.col-sm-4 Face skin (Score 1-10)
+        span#face-skin-sp.input-group-text.col-sm-5 Face skin (Score 1-10)
         input#face-skin.form-control(
           aria-describedby="face-skin" 
           type="text"
         )
         .input-group
-        span#body-skin-sp.input-group-text.col-sm-4 Body skin (Score 1-10)
+        span#body-skin-sp.input-group-text.col-sm-5 Body skin (Score 1-10)
         input#body-skin.form-control(
           aria-describedby="body-skin" 
           type="text"
         )
 .form-group.mb-3.col-sm-10
-    h3 Functional
+    h4 Functional
     h6 Strength
 
        .input-group
-        span#pull-up-sp.input-group-text.col-sm-4 Max pull-ups amount
+        span#pull-up-sp.input-group-text.col-sm-5 Max pull-ups amount
         input#pull-up.form-control(
           aria-describedby="pull-up" 
           type="text"
         )
         .input-group
-        span#push-up-sp.input-group-text.col-sm-4 Max push-ups amount
+        span#push-up-sp.input-group-text.col-sm-5 Max push-ups amount
         input#push-up.form-control(
           aria-describedby="push-up" 
           type="text"
@@ -128,7 +137,7 @@
           option(value="2") Regular push-ups
 
        .input-group
-        span#squats-sp.input-group-text.col-sm-4 Squats (kg or amount)
+        span#squats-sp.input-group-text.col-sm-5 Squats (kg or amount)
         input#squats.form-control(
           aria-describedby="squats" 
           type="text"
@@ -141,13 +150,13 @@
     h6 Cardiovascular 
 
        .input-group
-        span#run-sp.input-group-text.col-sm-4 Run..?
+        span#run-sp.input-group-text.col-sm-5 Run..?
         input#run.form-control(
           aria-describedby="run" 
           type="text"
         )
         .input-group
-        span#bike-sp.input-group-text.col-sm-4 Bike..?
+        span#bike-sp.input-group-text.col-sm-5 Bike..?
         input#bike.form-control(
           aria-describedby="bike" 
           type="text"
@@ -157,17 +166,17 @@
         //- todo 
 
 .form-group.mb-3.col-sm-10
-    h3 Mood
+    h4 Mood
 
        .input-group
-        span#mood-sp.input-group-text.col-sm-4 Average mood (Score 1-10)
+        span#mood-sp.input-group-text.col-sm-5 Average mood (Score 1-10)
         input#mood.form-control(
           aria-describedby="mood" 
           type="text"
           placeholder="1 - Sad, depressed, down, 10 - happy, high, awesome, great."
         )
         .input-group
-        span#mood-note-sp.input-group-text.col-sm-4 Note
+        span#mood-note-sp.input-group-text.col-sm-5 Note
         input#mood-note.form-control(
           aria-describedby="mood-note" 
           placeholder="How do you feel on average?"
@@ -175,17 +184,17 @@
         )
 
 .form-group.mb-3.col-sm-10
-    h3 Sleep
+    h4 Sleep
 
        .input-group
-        span#sleep-sp.input-group-text.col-sm-4 Average sleep quality (Score 1-10)
+        span#sleep-sp.input-group-text.col-sm-5 Average sleep quality (Score 1-10)
         input#sleep.form-control(
           aria-describedby="sleep" 
           type="text"
           placeholder="TODO"
         )
         .input-group
-        span#sleep-duration-sp.input-group-text.col-sm-4 Average amount of sleep per night, hours
+        span#sleep-duration-sp.input-group-text.col-sm-5 Average amount of sleep per night, hours
         input#sleep-duration.form-control(
           aria-describedby="sleep-duration" 
           type="text"
@@ -193,10 +202,10 @@
         )
 
 .form-group.mb-3.col-sm-10
-    h3 Daily routine
+    h4 Daily routine
 
        .input-group
-        span#training-volume-sp.input-group-text.col-sm-4 Average training volume per week, hours
+        span#training-volume-sp.input-group-text.col-sm-5 Average training volume per week, hours
         input#training-volume.form-control(
           aria-describedby="training-volume" 
           type="text"
@@ -204,28 +213,28 @@
         )
         //- rename
         .input-group 
-        span#training-type-sp.input-group-text.col-sm-4 Sport disciplines
+        span#training-type-sp.input-group-text.col-sm-5 Sport disciplines
         input#training-type.form-control(
           aria-describedby="training-type" 
           type="text"
           placeholder="TODO"
         )
         .input-group 
-        span#training-routine-sp.input-group-text.col-sm-4 Training routine
+        span#training-routine-sp.input-group-text.col-sm-5 Training routine
         input#training-routine.form-control(
           aria-describedby="training-routine" 
           type="text"
           placeholder="What type of training, how often, when, anything important (or not important)"
         )
         .input-group 
-        span#diet-sp.input-group-text.col-sm-4 Percentage of healthy food in weekly meal plan, %
+        span#diet-sp.input-group-text.col-sm-5 Percentage of healthy food in weekly meal plan, %
         input#diet.form-control(
           aria-describedby="diet" 
           type="text"
           placeholder="TODO"
         )
         .input-group 
-        span#routine-sp.input-group-text.col-sm-4 Note
+        span#routine-sp.input-group-text.col-sm-5 Note
         input#routine.form-control(
           aria-describedby="routine" 
           type="text"
@@ -236,3 +245,5 @@
 
 //- TODO add descriptions for 'score' fields, change data type to numbers in input fields, add descriptions
 //- TODO add How do you rate this field ? with score
+//- add photos to report? add common info (age, sex, name)
+

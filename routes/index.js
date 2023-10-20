@@ -34,10 +34,10 @@ router.post('/', function(req, res, next) {
 
   // and some justified text wrapped into columns
   doc
-    .text('And here is some wrapped text...', 100, 300)
+    .text('And here is some wrapped text...', 100, 100)
     .font('Times-Roman', 13)
     .moveDown()
-    .text(req.body.name, {
+    .text(req.body.bloodpressure, {
       width: 412,
       align: 'justify',
       indent: 30,
