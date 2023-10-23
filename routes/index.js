@@ -63,7 +63,6 @@ router.post('/', function(req, res, next) {
     .stroke();
 
   // sectionRate = req.body.mentalRate;
-  sectionRate = 7;
   let xVal1 = x0 + (sectionRadius * sectionRate);
   radius = sectionRadius * sectionRate;
   xVal2 = x0 + (angledSectionRadius * sectionRate);
@@ -74,7 +73,6 @@ router.post('/', function(req, res, next) {
     .stroke();
 
   // sectionRate = req.body.relationshipsRate;
-  sectionRate = 6;
   radius = sectionRadius * sectionRate;
   xVal1 = x0 + (sectionRadius * sectionRate);
   xVal2 = x0 + (angledSectionRadius * sectionRate);
@@ -85,7 +83,6 @@ router.post('/', function(req, res, next) {
     .stroke();
 
   // sectionRate = req.body.careerRate;
-  sectionRate = 3;
   radius = sectionRadius * sectionRate;
   yVal1 = y0 + radius;
   xVal2 = x0 + (angledSectionRadius * sectionRate);
@@ -96,7 +93,6 @@ router.post('/', function(req, res, next) {
     .stroke();
 
   // sectionRate = req.body.fitnessRate;
-  sectionRate = 9;
   radius = sectionRadius * sectionRate;
   yVal1 = y0 - radius;
   xVal2 = x0 - (angledSectionRadius * sectionRate);
@@ -104,10 +100,9 @@ router.post('/', function(req, res, next) {
   doc.path("M " + x0 + "," + y0+ " V " + yVal1 + " A " + radius + " " + radius + " 0 0 0 " + xVal2 + " " + yVal2 + " Z")
     .fillOpacity(0.3)
     .fill("violet")
-    .stroke();
+    .stroke();2
 
 // sectionRate = req.body.financeRate;
-sectionRate = 5;
   radius = sectionRadius * sectionRate;
   xVal1 = x0 - (sectionRadius * sectionRate);
   xVal2 = x0 - (angledSectionRadius * sectionRate);
@@ -118,7 +113,6 @@ sectionRate = 5;
     .stroke();
 
 // sectionRate = req.body.hobbiesRate;
-sectionRate = 10;
   radius = sectionRadius * sectionRate;
   xVal1 = x0 - (sectionRadius * sectionRate);
   xVal2 = x0 - (angledSectionRadius * sectionRate);
@@ -129,7 +123,6 @@ sectionRate = 10;
     .stroke();
 
 // sectionRate = req.body.funRate;
-sectionRate = 2;
   radius = sectionRadius * sectionRate;
   yVal1 = y0 + radius;
   xVal2 = x0 - (angledSectionRadius * sectionRate);
@@ -137,16 +130,15 @@ sectionRate = 2;
   doc.path("M " + x0 + "," + y0+ " V " + yVal1 + " A " + radius + " " + radius + " 0 0 1 " + xVal2 + " " + yVal2 + " Z")
     .fillOpacity(0.3)
     .fill("gold")
-    .stroke();
-
-  // x=x0+r⋅cos δ
-  // y=y0+r⋅sin δ
+    .stroke();    
 // SECTION WITH WHEEL OF LIFE - END
 
+  
 
-  doc.moveDown();
+
+// HEALTH SECTION - START
   currentY = 250;
-  // todo change to doc.width
+  //TODO:  change to doc.width
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight)
     .fillOpacity(0.6)
     .fill("gray");
@@ -155,11 +147,15 @@ sectionRate = 2;
 
   currentY = 290;
   // AESTHETIC PART
-  doc.rect(50, currentY, 170, 250)
-    .stroke();
+  // doc.rect(50, currentY, 170, 250)
+  //   .stroke();
 
-    // TODO add if for male/female
-  doc.image("public/images/female.jpg", 50, currentY, {height: 240,  align: 'center', valign: 'center'})
+  if (req.body.genderRadio === 'Female') {
+      doc.image("public/images/female.jpg", 50, currentY, {height: 240,  align: 'center', valign: 'center'})
+  } else {
+      doc.image("public/images/male.jpg", 50, currentY, {height: 240,  align: 'center', valign: 'center'})
+  }
+
 
 
   // HEALTH MARKERS PART
@@ -179,7 +175,7 @@ sectionRate = 2;
   doc.rect(420, currentY, 160, 120)
     .stroke();
 
-
+// HEALTH SECTION - END
 
 
   currentY = 550;

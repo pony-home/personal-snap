@@ -14,6 +14,23 @@
           type="text"
           name="age"
         )
+        .input-group
+        span#gender-sp.input-group-text.col-sm-5 Gender
+        //- .input-group.form-check.form-check-inline
+        input#femaleRadio.form-check-input(
+          value="Female" 
+          name="genderRadio" 
+          type="radio"
+        )
+        label.form-check-label(for="femaleRadio") Female
+        //- TODO: styling
+        //- .form-check
+        input#maleRadio.form-check-input(
+          value="option2" 
+          name="genderRadio" 
+          type="radio"
+        )
+        label.form-check-label(for="maleRadio") Male
 
 .form-group.mb-3.col-sm-10
       h3 Health
