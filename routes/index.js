@@ -2,14 +2,17 @@ var express = require('express');
 var router = express.Router();
 const PDFDocument = require('pdfkit');
 
-var doc = new PDFDocument();
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Annual snapshot' });
 });
 
 router.post('/', function(req, res, next) {
+
+  let fileName = 'Annual snapshot'
+  res.setHeader('Content-disposition', 'inline; filename='+ fileName +'.pdf');
+
+  const doc = new PDFDocument();
   doc.pipe(res);
 
   let currentY = 10;
@@ -134,13 +137,13 @@ sectionRate = 2;
   doc.path("M " + x0 + "," + y0+ " V " + yVal1 + " A " + radius + " " + radius + " 0 0 1 " + xVal2 + " " + yVal2 + " Z")
     .fillOpacity(0.3)
     .fill("gold")
-    .stroke();    
+    .stroke();
 
   // x=x0+r⋅cos δ
   // y=y0+r⋅sin δ
 // SECTION WITH WHEEL OF LIFE - END
 
-  
+
   doc.moveDown();
   currentY = 250;
   // todo change to doc.width
@@ -148,7 +151,7 @@ sectionRate = 2;
     .fillOpacity(0.6)
     .fill("gray");
 
-  doc.fontSize(12).fillColor('black').text("PHYSICAL HEALTH AND FITNESS", 200, currentY + 10); 
+  doc.fontSize(12).fillColor('black').text("PHYSICAL HEALTH AND FITNESS", 200, currentY + 10);
 
   currentY = 290;
   // AESTHETIC PART
@@ -185,8 +188,7 @@ sectionRate = 2;
   .fillOpacity(0.6)
   .fill("gray");
 
-  doc.fillColor('black').text("MENTAL HEALTH", 260, currentY + 10); 
-
+  doc.fillColor('black').text("MENTAL HEALTH", 260, currentY + 10);
 
   doc.end();
 });
