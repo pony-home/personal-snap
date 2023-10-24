@@ -1,6 +1,18 @@
 .form-group.mb-3.col-sm-10
     h3 Hobbies and personal growth
 
+         //- TODO: add required 
+      .input-group
+        span#personal-0-sp.input-group-text.col-sm-8 How do you feel about your personal growth right now?
+        input#personal-0.form-control(
+          aria-describedby="personal-0" 
+          type="number"
+          min="0"
+          max="10"
+          name="hobbiesRate"
+          placeholder="Score 1 - 10" 
+        )
+
       .input-group
         span#personal-1-sp.input-group-text.col-sm-8 Do you have a list of personal improvements goals? 
         input#personal-1.form-control(

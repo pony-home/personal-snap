@@ -1,6 +1,18 @@
 .form-group.mb-3.col-sm-10
     h3 Finance
 
+       //- TODO: add required 
+      .input-group
+        span#finance-0-sp.input-group-text.col-sm-8 How do you feel about your financial state right now?
+        input#finance-0.form-control(
+          aria-describedby="finance-0" 
+          type="number"
+          min="0"
+          max="10"
+          name="financeRate"
+          placeholder="Score 1 - 10" 
+        )
+
       .input-group
         span#finance-1-sp.input-group-text.col-sm-8 How satisfied you with your income? (Score 1-10)
         input#finance-1.form-control(

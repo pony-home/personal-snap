@@ -32,9 +32,9 @@ router.post('/', function(req, res, next) {
 
 
 // SECTION WITH WHEEL OF LIFE - START
-// TODO move to separate method
-// TODO change colors
-// TODO add titles for each section
+// TODO: move to separate method
+// TODO: change colors
+// TODO: add titles for each section
   let x0 = 440;
   let y0 = 160;
   let sectionRadius = 8;
@@ -72,7 +72,7 @@ router.post('/', function(req, res, next) {
     .fill("orange")
     .stroke();
 
-  // sectionRate = req.body.relationshipsRate;
+  // sectionRate = req.body.relationsRate;
   radius = sectionRadius * sectionRate;
   xVal1 = x0 + (sectionRadius * sectionRate);
   xVal2 = x0 + (angledSectionRadius * sectionRate);
@@ -138,7 +138,6 @@ router.post('/', function(req, res, next) {
 
 // HEALTH SECTION - START
   currentY = 250;
-  //TODO:  change to doc.width
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight)
     .fillOpacity(0.6)
     .fill("gray");
@@ -151,9 +150,13 @@ router.post('/', function(req, res, next) {
   //   .stroke();
 
   if (req.body.genderRadio === 'Female') {
-      doc.image("public/images/female.jpg", 50, currentY, {height: 240,  align: 'center', valign: 'center'})
-  } else {
-      doc.image("public/images/male.jpg", 50, currentY, {height: 240,  align: 'center', valign: 'center'})
+    doc.fontSize(12).fillColor('black').text("32", 200, currentY+20);
+
+      doc.image("public/images/female.jpg", 50, currentY, {height: 240,  align: 'center', valign: 'center'});
+  } else {  
+    doc.image("public/images/male.jpg", 50, currentY, {height: 240,  align: 'center', valign: 'center'});
+    // doc.fontSize(10).fillColor('black').text("32", 120, currentY+50);
+
   }
 
 

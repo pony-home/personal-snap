@@ -1,5 +1,17 @@
 .form-group.mb-3.col-sm-10
     h3 Business and career
+    
+      //- TODO: add required 
+      .input-group
+        span#career-0-sp.input-group-text.col-sm-8 How do you feel about your business and career right now?
+        input#career-0.form-control(
+          aria-describedby="career-0" 
+          type="number"
+          min="0"
+          max="10"
+          name="careerRate"
+          placeholder="Score 1 - 10" 
+        )
 
       .input-group
         span#career-1-sp.input-group-text.col-sm-8 How do you earn money? 

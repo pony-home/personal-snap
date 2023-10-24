@@ -23,7 +23,7 @@
           type="radio"
         )
         label.form-check-label(for="femaleRadio") Female
-        //- TODO: styling
+        //- TODO: styling, checked default option
         //- .form-check
         input#maleRadio.form-check-input(
           value="option2" 
@@ -34,6 +34,18 @@
 
 .form-group.mb-3.col-sm-10
       h3 Health
+
+             //- TODO: add required 
+      .input-group
+        span#health-0-sp.input-group-text.col-sm-8 How do you feel about your health right now?
+        input#health-0.form-control(
+          aria-describedby="health-0" 
+          type="number"
+          min="0"
+          max="10"
+          name="healthRate"
+          placeholder="Score 1 - 10" 
+        )
 
       .input-group
         span#blood-pressure-sp.input-group-text.col-sm-5 Blood pressure
@@ -70,6 +82,12 @@
         span#vo2max-sp.input-group-text.col-sm-5 VO2max
         input#vo2max.form-control(
           aria-describedby="vo2max" 
+          type="text"
+        )
+        .input-group
+        span#resting-hr-sp.input-group-text.col-sm-5 Resting HR
+        input#resting-hr.form-control(
+          aria-describedby="resting-hr" 
           type="text"
         )
 
@@ -150,8 +168,20 @@
           type="text"
         )
 .form-group.mb-3.col-sm-10
-    h4 Functional
+    h4 Fitness
     h6 Strength
+
+             //- TODO: add required 
+      .input-group
+        span#fitness-0-sp.input-group-text.col-sm-8 How do you feel about your fitness form right now?
+        input#fitness-0.form-control(
+          aria-describedby="fitness-0" 
+          type="number"
+          min="0"
+          max="10"
+          name="fitnessRate"
+          placeholder="Score 1 - 10" 
+        )
 
        .input-group
         span#pull-up-sp.input-group-text.col-sm-5 Max pull-ups amount
@@ -278,6 +308,5 @@
     
 
 //- TODO add descriptions for 'score' fields, change data type to numbers in input fields, add descriptions
-//- TODO add How do you rate this field ? with score
-//- add photos to report? add common info (age, sex, name)
+//- add photos to report? 
 

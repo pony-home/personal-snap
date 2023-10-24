@@ -1,12 +1,18 @@
 .form-group.mb-3.col-sm-10
     h3 Fun and recreation
 
+         //- TODO: add required 
       .input-group
-        span#fun-1-sp.input-group-text.col-sm-8 How would you rate this area of your life?
-        input#fun-1.form-control(
-          aria-describedby="fun-1" 
-          type="text"
+        span#fun-0-sp.input-group-text.col-sm-8 How do you feel about fun and recreation area in your life right now?
+        input#fun-0.form-control(
+          aria-describedby="fun-0" 
+          type="number"
+          min="0"
+          max="10"
+          name="funRate"
+          placeholder="Score 1 - 10" 
         )
+
         .input-group
         //- rephrase
         span#fun-2-sp.input-group-text.col-sm-8 How much times per year can you travel/see new city/place ? 
