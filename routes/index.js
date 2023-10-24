@@ -19,16 +19,17 @@ router.post('/', function(req, res, next) {
   let titleBoxHeight = 30;
   let titleBoxWidth = 700;
 
-  doc.fontSize(10).text("Annual snapshot",450, 10);
+  doc.fontSize(10).fillColor('gray').text("Annual snapshot, " + new Date().getFullYear() ,500, 10, {oblique: true, lineBreak: false});
 
   currentY = 40;
 
   // TODO text to upper case, change font, add background
   // doc.fontSize(20).fillColor('black').text(req.body.name + "," + req.body.age + " years", 180, currentY);
-  doc.fontSize(20).fillColor('black').text("KRISTINA, 31 years", 180, currentY).fillOpacity(1);
+  doc.fontSize(20).fillColor('gray').text("KRISTINA, 31 years", 210, currentY).fillOpacity(1);
 
   currentY = 75;
-  doc.image("public/images/image.jpeg", 50, currentY, {height: 170,  align: 'center', valign: 'center'});
+  doc.roundedRect(40, currentY-5, 250, 170, 30).fillOpacity(0.3).fillAndStroke("gray", "gray");
+  doc.fillOpacity(1).image("public/images/image.jpeg", 60, currentY, {height: 160,  align: 'center', valign: 'center'});
 
 
 // SECTION WITH WHEEL OF LIFE - START
@@ -50,6 +51,19 @@ router.post('/', function(req, res, next) {
   doc.circle(x0, y0, sectionRadius*3).opacity(0.1).stroke("gray");
   doc.circle(x0, y0, sectionRadius*2).opacity(0.1).stroke("gray");
   doc.circle(x0, y0, sectionRadius).opacity(0.1).stroke("gray");
+
+  doc.fontSize(6).fillColor('black').opacity(0.5).text("Fitness", 380, currentY+8);
+  doc.fontSize(6).fillColor('black').opacity(0.5).text("Health", 480, currentY+8);
+
+  doc.fontSize(6).fillColor('black').opacity(0.5).text("Finance", 340, currentY+58);
+  doc.fontSize(6).fillColor('black').opacity(0.5).text("Mental health", 520, currentY+58, {lineBreak: false});
+
+  doc.fontSize(6).fillColor('black').opacity(0.5).text("Personal growth", 317, currentY+108);
+  doc.fontSize(6).fillColor('black').opacity(0.5).text("Relationships", 520, currentY+108, {lineBreak: false});
+
+  doc.fontSize(6).fillColor('black').opacity(0.5).text("Fun and recreation", 357, currentY+158);
+  doc.fontSize(6).fillColor('black').opacity(0.5).text("Career", 480, currentY+158);
+
 
   // let sectionRate = req.body.healthRate;
   let sectionRate = 8;
