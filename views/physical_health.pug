@@ -169,7 +169,6 @@
         )
 .form-group.mb-3.col-sm-10
     h4 Fitness
-    h6 Strength
 
        .input-group
         span#fitness-0-sp.input-group-text.col-sm-8 How do you feel about your fitness form right now?
@@ -182,7 +181,9 @@
           placeholder="Score 1 - 10" 
         )
 
-        .input-group
+    h6 Strength
+
+       .input-group
         span#pull-up-sp.input-group-text.col-sm-5 Max pull-ups amount
         input#pull-up.form-control(
           aria-describedby="pull-up" 
@@ -213,20 +214,148 @@
     h6 Cardiovascular 
 
        .input-group
-        span#run-sp.input-group-text.col-sm-5 Run..?
-        input#run.form-control(
-          aria-describedby="run" 
+        span#cardio-0-sp.input-group-text.col-sm-5 Personal record, mins
+        select#cardio-0-select.form-select
+          option(selected="") Open this select menu
+          option(value="1") Run
+          option(value="2") Bike
+        select#cardio-dist-0-select.form-select
+          option(selected="") Open this select menu
+          option(value="1") 1 km
+          option(value="2") 5 km
+          option(value="3") 10 km
+        input#cardio-0.form-control(
+          aria-describedby="cardio-0" 
           type="text"
         )
+
         .input-group
-        span#bike-sp.input-group-text.col-sm-5 Bike..?
-        input#bike.form-control(
-          aria-describedby="bike" 
+        span#cardio-1-sp.input-group-text.col-sm-5 Personal record, mins
+        select#cardio-1-select.form-select
+          option(selected="") Open this select menu
+          option(value="1") Run
+          option(value="2") Bike
+        select#cardio-dist-1-select.form-select
+          option(selected="") Open this select menu
+          option(value="1") 1 km
+          option(value="2") 5 km
+          option(value="3") 10 km
+        input#cardio-1.form-control(
+          aria-describedby="cardio-1" 
+          type="text"
+        )
+
+        .input-group
+        span#cardio-2-sp.input-group-text.col-sm-5 Personal record, mins
+        select#cardio-2-select.form-select
+          option(selected="") Open this select menu
+          option(value="1") Run
+          option(value="2") Bike
+        select#cardio-dist-2-select.form-select
+          option(selected="") Open this select menu
+          option(value="1") 1 km
+          option(value="2") 5 km
+          option(value="3") 10 km
+        input#cardio-2.form-control(
+          aria-describedby="cardio-2" 
+          type="text"
+        )
+
+
+        .input-group
+        span#cardio-3-sp.input-group-text.col-sm-5 Longest distance, km
+        select#cardio-3-select.form-select
+          option(selected="") Open this select menu
+          option(value="1") Run
+          option(value="2") Bike
+        input#cardio-3.form-control(
+          aria-describedby="cardio-3" 
+          type="text"
+        )
+
+        .input-group
+        span#cardio-4-sp.input-group-text.col-sm-5 Longest distance, km
+        select#cardio-4-select.form-select
+          option(selected="") Open this select menu
+          option(value="1") Run
+          option(value="2") Bike
+        input#cardio-4.form-control(
+          aria-describedby="cardio-4" 
+          type="text"
+        )
+
+
+        .input-group
+        span#cardio-5-sp.input-group-text.col-sm-5 Yearly mileage, km
+        select#cardio-5-select.form-select
+          option(selected="") Open this select menu
+          option(value="1") Run
+          option(value="2") Bike
+        input#cardio-5.form-control(
+          aria-describedby="cardio-5" 
+          type="text"
+        )
+
+        .input-group
+        span#cardio-6-sp.input-group-text.col-sm-5 Yearly mileage, km
+        select#cardio-6-select.form-select
+          option(selected="") Open this select menu
+          option(value="1") Run
+          option(value="2") Bike
+        input#cardio-6.form-control(
+          aria-describedby="cardio-6" 
+          type="text"
+        )
+
+        .input-group
+        span#cardio-7-sp.input-group-text.col-sm-5 Average steps per day (yearly)
+        input#cardio-7.form-control(
+          aria-describedby="cardio-7" 
           type="text"
         )
 
     h6 Moblity 
-        //- todo 
+
+       .input-group
+        span#mobility-0-sp.input-group-text.col-sm-8 How do you feel about your mobility in shoulders?
+        input#mobility-0.form-control(
+          aria-describedby="mobility-0" 
+          type="number"
+          min="0"
+          max="10"
+          name="mobilityRate0"
+          placeholder="Score 1 - 10 (TODO add example tests/exercises" 
+        )
+        .input-group
+        span#mobility-1-sp.input-group-text.col-sm-8 How do you feel about your mobility in thoracic spine?
+        input#mobility-1.form-control(
+          aria-describedby="mobility-1" 
+          type="number"
+          min="0"
+          max="10"
+          name="mobilityRate1"
+          placeholder="Score 1 - 10 (TODO add example tests/exercises" 
+        )
+        .input-group
+        span#mobility-2-sp.input-group-text.col-sm-8 How do you feel about your mobility in hips?
+        input#mobility-2.form-control(
+          aria-describedby="mobility-2" 
+          type="number"
+          min="0"
+          max="10"
+          name="mobilityRate2"
+          placeholder="Score 1 - 10 (TODO add example tests/exercises" 
+        )
+        .input-group
+        span#mobility-3-sp.input-group-text.col-sm-8 How do you feel about your mobility in ankles?
+        input#mobility-3.form-control(
+          aria-describedby="mobility-3" 
+          type="number"
+          min="0"
+          max="10"
+          name="mobilityRate3"
+          placeholder="Score 1 - 10 (TODO add example tests/exercises" 
+        )
 
 .form-group.mb-3.col-sm-10
     h4 Mood
