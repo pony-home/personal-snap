@@ -404,6 +404,89 @@ router.post('/', function(req, res, next) {
   doc.fontSize(12).fillOpacity(1).fillColor('white').text("MENTAL HEALTH", 240, currentY + 10);
 
 
+  currentY = 590;
+  x0 = 50;
+  let grayBoxWidth = 80;
+  //metrics
+  //gray boxed
+  doc.rect(x0, currentY+10, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+20, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+30, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+40, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+50, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+60, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+70, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+80, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+90, grayBoxWidth, 10).fillAndStroke("gray", "white");
+
+  //titles on gray background
+  let titleStartX = 55;
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Resilience", titleStartX, currentY+13);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Positivity", titleStartX, currentY+23);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Compassion and empathy", titleStartX, currentY+33);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Happiness", titleStartX, currentY+43);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Social interactions", titleStartX, currentY+53);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Confidence", titleStartX, currentY+63);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Willpower and tenacity", titleStartX, currentY+73);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Anxiety", titleStartX, currentY+83);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Explosiveness", titleStartX, currentY+93);
+
+  //value background
+  gradX1 = 135;
+  gradX2 = 235;
+  let gradWidth = 100;
+  let grad3 = doc.linearGradient(gradX1, currentY, gradX2, currentY);
+  grad3.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
+
+  doc.fillOpacity(0.3).rect(gradX1, currentY+13, gradWidth, 5).fill(grad3);
+  doc.fillOpacity(0.3).rect(gradX1, currentY+23, gradWidth, 5).fill(grad3);
+  doc.fillOpacity(0.3).rect(gradX1, currentY+33, gradWidth, 5).fill(grad3);
+  doc.fillOpacity(0.3).rect(gradX1, currentY+43, gradWidth, 5).fill(grad3);
+  doc.fillOpacity(0.3).rect(gradX1, currentY+53, gradWidth, 5).fill(grad3);
+  doc.fillOpacity(0.3).rect(gradX1, currentY+63, gradWidth, 5).fill(grad3);
+  doc.fillOpacity(0.3).rect(gradX1, currentY+73, gradWidth, 5).fill(grad3);
+  let grad4 = doc.linearGradient(gradX1, currentY, gradX2, currentY);
+  grad4.stop(0, 'green').stop(0.5, 'yellow').stop(1, 'red');
+  doc.fillOpacity(0.3).rect(gradX1, currentY+83, gradWidth, 5).fill(grad4);
+  doc.fillOpacity(0.3).rect(gradX1, currentY+93, gradWidth, 5).fill(grad4);
+
+  //value text or value
+  doc.fontSize(6).fillOpacity(1);
+  let resilienceScore = 7;
+  // let resilienceScore = body.req.resilienceScore;
+  doc.rect(gradX1 + valueStep*resilienceScore, currentY + 11, valueSignWidth, valueSightHeight).fill('gray');
+  let positivityScore = 8;
+  // let sleepScore = body.req.??;
+  doc.rect(gradX1 + valueStep*positivityScore, currentY + 21, valueSignWidth, valueSightHeight).fill('gray');
+  let compassionScore = 5;
+  // let explosivnessScore = body.req.??;
+  doc.rect(gradX1 + valueStep*compassionScore, currentY + 31, valueSignWidth, valueSightHeight).fill('gray');
+  let happinessScore = 9;
+  // let explosivnessScore = body.req.??;
+  doc.rect(gradX1 + valueStep*happinessScore, currentY + 41, valueSignWidth, valueSightHeight).fill('gray');
+  let socialScore = 8;
+  // let explosivnessScore = body.req.??;
+  doc.rect(gradX1 + valueStep*socialScore, currentY + 51, valueSignWidth, valueSightHeight).fill('gray');
+  let confidenceScore = 9;
+  // let explosivnessScore = body.req.??;
+  doc.rect(gradX1 + valueStep*confidenceScore, currentY + 61, valueSignWidth, valueSightHeight).fill('gray');
+  let willpowerScore = 6;
+  // let explosivnessScore = body.req.??;
+  doc.rect(gradX1 + valueStep*willpowerScore, currentY + 71, valueSignWidth, valueSightHeight).fill('gray');
+  let anxietyScore = 7;
+// let explosivnessScore = body.req.??;
+  doc.rect(gradX1 + valueStep*anxietyScore, currentY + 81, valueSignWidth, valueSightHeight).fill('gray');
+  let explosivnessScore = 5;
+  // let explosivnessScore = body.req.??;
+  doc.rect(gradX1 + valueStep*explosivnessScore, currentY + 91, valueSignWidth, valueSightHeight).fill('gray');
+
+  currentY 
+  let textColumnX = 260;
+  doc.fontSize(7).fillColor("gray").text(lorem+lorem.substring(250), textColumnX, currentY+10, {align: 'justify', width: 310});
+  
+
+
+
 
 
   doc.end();
