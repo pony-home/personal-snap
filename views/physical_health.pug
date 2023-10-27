@@ -367,13 +367,6 @@
           type="text"
           placeholder="1 - Sad, depressed, down, 10 - happy, high, awesome, great."
         )
-        .input-group
-        span#mood-note-sp.input-group-text.col-sm-5 Note
-        input#mood-note.form-control(
-          aria-describedby="mood-note" 
-          placeholder="How do you feel on average?"
-          type="text"
-        )
 
 .form-group.mb-3.col-sm-10
     h4 Sleep
@@ -400,6 +393,14 @@
         span#training-volume-sp.input-group-text.col-sm-5 Average training volume per week, hours
         input#training-volume.form-control(
           aria-describedby="training-volume" 
+          type="text"
+          placeholder="TODO"
+        )
+
+       .input-group
+        span#training-volume-1-sp.input-group-text.col-sm-5 Average training volume per week, amount
+        input#training-volume-1.form-control(
+          aria-describedby="training-volume-1" 
           type="text"
           placeholder="TODO"
         )
@@ -430,7 +431,7 @@
         input#routine.form-control(
           aria-describedby="routine" 
           type="text"
-          placeholder="What do you eat, how do you train, supplements, healthy habits, cold/hot exposure, etc"
+          placeholder="Daily routine, average mood, what do you eat, how do you train, supplements, healthy habits, cold/hot exposure, etc"
         )
 
     

@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 
-  const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in suscipit purus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus nec hendrerit felis. Morbi aliquam facilisis risus eu lacinia. Sed eu leo in turpis fringilla hendrerit. Ut nec accumsan nisl. Suspendisse rhoncus nisl posuere tortor tempus et dapibus elit porta. Cras leo neque, elementum a rhoncus ut, vestibulum non nibh. Phasellus pretium justo turpis. Etiam vulputate, odio vitae tincidunt ultricies, eros odio dapibus nisi, ut tincidunt lacus arcu eu elit.';
+  const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in suscipit purus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus nec hendrerit felis. Morbi aliquam facilisis risus eu lacinia. Sed eu leo in turpis fringilla hendrerit. Ut nec accumsan nisl. Suspendisse rhoncus nisl posuere tortor tempus et dapibus elit porta. Cras leo neque, elementum a rhoncus ut, vestibulum non nibh. Phasellus pretium justo turpis. Etiam vulputate, odio vitae tincidunt ultricies, eros odio dapibus nisi, ut tincidunt lacus arcu eu elit. Aenean velit erat, vehicula eget lacinia ut, dignissim non tellus. Aliquam nec lacus mi, sed vestibulum nunc. Suspendisse potenti. Curabitur vitae sem turpis.';
 
   let fileName = 'Annual snapshot'
   res.setHeader('Content-disposition', 'inline; filename='+ fileName +'.pdf');
@@ -175,12 +175,12 @@ router.post('/', function(req, res, next) {
     // TODO: add BMI scale on the bottom
 
   }
-
+  let valueSignWidth = 1;
+  let valueSightHeight = 9;
+  let valueStep = 8.5;
 
 
   // HEALTH MARKERS PART
-  let physicalBoxWidth = 170;
-
   doc.strokeOpacity(0.6);
   // doc.rect(220, currentY, physicalBoxWidth, 120).stroke();
   let markersRectWidth = 70;
@@ -221,8 +221,61 @@ router.post('/', function(req, res, next) {
   doc.text("40 bpm", 300, currentY+63);
 
 
-  // OTHERS PART
-  // doc.strokeColor("gray").fillColor("gray").rect(400, currentY, physicalBoxWidth, 120).stroke();
+  // MISC PART
+  doc.fontSize(10).fillColor("gray").text("Misc", 405, currentY);
+
+  //gray boxed
+  doc.rect(405, currentY+10, markersRectWidth+4, 10).fillAndStroke("gray", "white");
+  doc.rect(405, currentY+20, markersRectWidth+4, 10).fillAndStroke("gray", "white");
+  doc.rect(405, currentY+30, markersRectWidth+4, 10).fillAndStroke("gray", "white");
+  doc.rect(405, currentY+40, markersRectWidth+4, 10).fillAndStroke("gray", "white");
+  doc.rect(405, currentY+50, markersRectWidth+4, 10).fillAndStroke("gray", "white");
+  doc.rect(405, currentY+60, markersRectWidth+4, 10).fillAndStroke("gray", "white");
+  doc.rect(405, currentY+70, markersRectWidth+4, 10).fillAndStroke("gray", "white");
+  doc.rect(405, currentY+80, markersRectWidth+4, 40).fillAndStroke("gray", "white");
+
+  //titles on gray background
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Average mood", 409, currentY+13);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Average sleep quality", 409, currentY+23);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Average amount of sleep", 409, currentY+33);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Training volume per week", 409, currentY+43);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Training volume per week", 409, currentY+53);
+  // TODO: rename
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Healthy food percentage", 409, currentY+63);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Sport disciplines", 409, currentY+73);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Training routine", 409, currentY+83);
+
+  //value background
+  let gradX1 = 480;
+  let gradX2 = 570;
+  let grad1 = doc.linearGradient(gradX1, currentY, gradX2, currentY);
+  grad1.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
+  doc.fillOpacity(0.3).rect(gradX1+1, currentY+13, markersValueRectWidth+3, 5).fill(grad1);
+  doc.fillOpacity(0.3).rect(gradX1+1, currentY+23, markersValueRectWidth+3, 5).fill(grad1);
+  doc.fillOpacity(0.2).rect(gradX1, currentY+30, markersValueRectWidth+5, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+40, markersValueRectWidth+5, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+50, markersValueRectWidth+5, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+60, markersValueRectWidth+5, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+70, markersValueRectWidth+5, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+80, markersValueRectWidth+5, 40).fillAndStroke("gray", "white");
+
+  //value text or value
+  doc.fontSize(6).fillOpacity(1);
+  let moodScore = 7;
+  // let moodScore = body.req.??;
+  doc.fillOpacity(1).rect(gradX1 + valueStep*moodScore, currentY + 11, valueSignWidth, valueSightHeight).fill('gray');
+  let sleepScore = 8;
+  // let sleepScore = body.req.??;
+  doc.rect(gradX1 + valueStep*sleepScore, currentY + 21, valueSignWidth, valueSightHeight).fill('gray');
+
+  doc.fillColor("gray").text("7 hours", gradX1+2, currentY+33);
+  doc.fillColor("gray").text("6 hours", gradX1+2, currentY+43);
+  doc.fillColor("gray").text("7 trainigs", gradX1+2, currentY+53);
+  doc.fillColor("gray").text("85 %", gradX1+2, currentY+63);
+  doc.fillColor("gray").text("Strength, run, bike", gradX1+2, currentY+73);
+    // TODO: define max length in input form
+  doc.fillColor("gray").text(lorem.substring(0, 150), gradX1+2, currentY+83, {align: 'justify', width: 90});
+
 
 
   currentY = 360;
@@ -304,15 +357,15 @@ router.post('/', function(req, res, next) {
   doc.rect(225, currentY+28, fitnessValueRectWidth, 10).fillAndStroke("gray", "white");
   doc.rect(225, currentY+38, fitnessValueRectWidth, 10).fillAndStroke("gray", "white");
 
-  let gradX1 = 300;
-  let gradX2 = 385;
-  let grad = doc.linearGradient(gradX1, currentY, gradX2, currentY);
-  grad.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
+  gradX1 = 300;
+  gradX2 = 385;
+  let grad2 = doc.linearGradient(gradX1, currentY, gradX2, currentY);
+  grad2.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
 
-  doc.fillOpacity(0.3).rect(gradX1, currentY+10, mobilityScoreWidth, 5).fill(grad);
-  doc.rect(gradX1, currentY+20, mobilityScoreWidth, 5).fill(grad);
-  doc.rect(gradX1, currentY+30, mobilityScoreWidth, 5).fill(grad);
-  doc.rect(gradX1, currentY+40, mobilityScoreWidth, 5).fill(grad);
+  doc.fillOpacity(0.3).rect(gradX1, currentY+10, mobilityScoreWidth, 5).fill(grad2);
+  doc.rect(gradX1, currentY+20, mobilityScoreWidth, 5).fill(grad2);
+  doc.rect(gradX1, currentY+30, mobilityScoreWidth, 5).fill(grad2);
+  doc.rect(gradX1, currentY+40, mobilityScoreWidth, 5).fill(grad2);
 
     // TODO: retrieve select value for all fields
   doc.fontSize(6).fillColor("white").fillOpacity(1).text("Shoulders mobility", 230, currentY+11);
@@ -321,9 +374,7 @@ router.post('/', function(req, res, next) {
   doc.fillColor("white").text("Ankles mobility", 230, currentY+41);
 
   // TODO: mobility values
-  let valueSignWidth = 1;
-  let valueSightHeight = 9;
-  let valueStep = 8.5;
+
   let mobilityScore = 8;
   // let mobilityScore = body.req.mobilityRate0;
   doc.rect(gradX1 + valueStep*mobilityScore, currentY + 8, valueSignWidth, valueSightHeight).fill('gray');
@@ -337,14 +388,10 @@ router.post('/', function(req, res, next) {
   mobilityScore = 5;
   doc.rect(gradX1 + valueStep*mobilityScore, currentY + 38, valueSignWidth, valueSightHeight).fill('gray');
 
-
-
-  // FREE TEXT PART
+  // SUMMARY PART
   currentY = 415;
-  doc.fontSize(10).fillColor("gray").text("Summary", 405, currentY);
-  doc.fontSize(7).fillColor("gray").text(lorem, 405, currentY+20, {align: 'justify', width: 160});
-
-
+  doc.fontSize(9).fillColor("gray").text("Summary", 405, currentY);
+  doc.fontSize(6).fillColor("gray").text(lorem, 405, currentY+10, {align: 'justify', width: 160});
 // HEALTH SECTION - END
 
 
@@ -355,6 +402,9 @@ router.post('/', function(req, res, next) {
     .fill("gray");
 
   doc.fontSize(12).fillOpacity(1).fillColor('white').text("MENTAL HEALTH", 240, currentY + 10);
+
+
+
 
   doc.end();
 });
