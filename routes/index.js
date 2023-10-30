@@ -480,12 +480,103 @@ router.post('/', function(req, res, next) {
   // let explosivnessScore = body.req.??;
   doc.rect(gradX1 + valueStep*explosivnessScore, currentY + 91, valueSignWidth, valueSightHeight).fill('gray');
 
-  currentY 
   let textColumnX = 260;
   doc.fontSize(7).fillColor("gray").text(lorem+lorem.substring(250), textColumnX, currentY+10, {align: 'justify', width: 310});
   
 
+/////////////////////////////////////////////////////////////////////
+  doc.addPage();
+  currentY = 10;
+  // RELATIONSHIPS SECTION START
+  // TODO: add time quality + time amount metrics (instead of 1 time metric)
+  doc.rect(0, currentY, titleBoxWidth, titleBoxHeight)
+    .fillOpacity(0.4)
+    .fill("gray");
 
+  doc.fontSize(12).fillOpacity(1).fillColor('white').text("RELATIONSHIPS", 240, currentY + 10);
+
+  let column1X = 55;
+  let column2X = 227;
+  let column3X = 400;
+  currentY = 45;
+
+  //romantic
+  doc.fontSize(9).fillColor("gray").text("Romantic", column1X, currentY);
+  doc.rect(column1X, currentY+10, markersRectWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(column1X, currentY+20, markersRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Satisfaction", column1X +3, currentY+13);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together", column1X +3, currentY+23);
+
+  gradX1 = 130;
+  gradX2 = 220;
+  let grad5 = doc.linearGradient(gradX1, currentY, gradX2, currentY);
+  grad5.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
+
+  doc.fillOpacity(0.3).rect(gradX1, currentY+13, markersValueRectWidth, 5).fill(grad5);
+  doc.fillOpacity(0.3).rect(gradX1, currentY+23, markersValueRectWidth, 5).fill(grad5);
+  doc.fontSize(6).fillOpacity(1);
+  let romanticSatisfaction = 7;
+  // let resilienceScore = body.req.resilienceScore;
+  doc.rect(gradX1 + valueStep*romanticSatisfaction, currentY + 11, valueSignWidth, valueSightHeight).fill('gray');
+  let romanticTime = 8;
+  // let resilienceScore = body.req.resilienceScore;
+  doc.rect(gradX1 + valueStep*romanticTime, currentY + 21, valueSignWidth, valueSightHeight).fill('gray');
+  doc.fontSize(6).fillColor("gray").text(lorem.substring(0, 400), column1X, currentY+35, {align: 'justify', width: 165});
+
+
+  //family
+  doc.fontSize(9).fillColor("gray").text("Family", column2X, currentY);
+  doc.rect(column2X, currentY+10, markersRectWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(column2X, currentY+20, markersRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Atmosphere", column2X +3, currentY+13);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together", column2X +3, currentY+23);
+
+  gradX1 = 302;
+  gradX2 = 392;
+  grad5 = doc.linearGradient(gradX1, currentY, gradX2, currentY);
+  grad5.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
+
+  doc.fillOpacity(0.3).rect(gradX1, currentY+13, markersValueRectWidth, 5).fill(grad5);
+  doc.fillOpacity(0.3).rect(gradX1, currentY+23, markersValueRectWidth, 5).fill(grad5);
+  doc.fontSize(6).fillOpacity(1);
+  let familyAtmosphere = 7;
+  // let resilienceScore = body.req.resilienceScore;
+  doc.rect(gradX1 + valueStep*familyAtmosphere, currentY + 11, valueSignWidth, valueSightHeight).fill('gray');
+  let familyTime = 8;
+  // let resilienceScore = body.req.resilienceScore;
+  doc.rect(gradX1 + valueStep*familyTime, currentY + 21, valueSignWidth, valueSightHeight).fill('gray');
+  doc.fontSize(6).fillColor("gray").text(lorem.substring(0, 400), column2X, currentY+35, {align: 'justify', width: 165});
+
+  //friends
+  doc.fontSize(9).fillColor("gray").text("Friends", column3X, currentY);
+  doc.rect(column3X, currentY+10, markersRectWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(column3X, currentY+20, markersRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Friends amount", column3X +3, currentY+13);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together", column3X +3, currentY+23);
+
+  gradX1 = 475;
+  gradX2 = 565;
+  grad5 = doc.linearGradient(gradX1, currentY, gradX2, currentY);
+  grad5.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
+
+  doc.fillOpacity(0.3).rect(gradX1, currentY+13, markersValueRectWidth, 5).fill(grad5);
+  doc.fillOpacity(0.3).rect(gradX1, currentY+23, markersValueRectWidth, 5).fill(grad5);
+  doc.fontSize(6).fillOpacity(1);
+  let friendsAmount = 7;
+  // let resilienceScore = body.req.resilienceScore;
+  doc.rect(gradX1 + valueStep*friendsAmount, currentY + 11, valueSignWidth, valueSightHeight).fill('gray');
+  let friendsTime = 8;
+  // let resilienceScore = body.req.resilienceScore;
+  doc.rect(gradX1 + valueStep*friendsTime, currentY + 21, valueSignWidth, valueSightHeight).fill('gray');
+  doc.fontSize(6).fillColor("gray").text(lorem.substring(0, 400), column3X, currentY+35, {align: 'justify', width: 165});
+
+
+
+  /////////////////////////////////////////////////////////////////////
+  currentY = 135;
+  // RELATIONSHIPS SECTION START
+  doc.rect(0, currentY, titleBoxWidth, titleBoxHeight).fillOpacity(0.4).fill("gray");
+  doc.fontSize(12).fillOpacity(1).fillColor('white').text("BUSINESS AND CAREER", 240, currentY + 10);
 
 
 
