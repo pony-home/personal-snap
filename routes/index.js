@@ -590,11 +590,80 @@ router.post('/', function(req, res, next) {
 
 
 
-  /////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   currentY = 145;
   // BUSINESS AND CAREER SECTION START
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight).fillOpacity(0.4).fill("gray");
   doc.fontSize(12).fillOpacity(1).fillColor('white').text("BUSINESS AND CAREER", 220, currentY + 10);
+
+  currentY = 170;
+  //metrics
+  //gray boxed
+  grayBoxWidth = 100;
+  doc.rect(x0, currentY+10, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+20, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+30, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+40, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+50, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+60, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+70, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+80, grayBoxWidth, 10).fillAndStroke("gray", "white");
+
+  //titles on gray background
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Money earned by", titleStartX, currentY+13);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Career path", titleStartX, currentY+23);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Role in the team", titleStartX, currentY+33);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Amount of time for job (weekly)", titleStartX, currentY+43);
+
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Amount of time spent (satisfaction)", titleStartX, currentY+53);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Job/career satisfaction", titleStartX, currentY+63);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Salary satisfaction", titleStartX, currentY+73);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Fit to life mission", titleStartX, currentY+83);
+
+  //value background
+  gradX1 = 150;
+  gradX2 = 235;
+  let valueRectWidth = 90;
+  gradWidth = 90;
+  doc.fillOpacity(0.2).rect(gradX1, currentY+10, valueRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+20, valueRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+30, valueRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+40, valueRectWidth, 10).fillAndStroke("gray", "white");
+
+  let grad6 = doc.linearGradient(gradX1, currentY, gradX2, currentY);
+  grad6.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
+
+  doc.fillOpacity(0.3).rect(gradX1+2, currentY+53, gradWidth, 5).fill(grad6);
+  doc.fillOpacity(0.3).rect(gradX1+2, currentY+63, gradWidth, 5).fill(grad6);
+  doc.fillOpacity(0.3).rect(gradX1+2, currentY+73, gradWidth, 5).fill(grad6);
+  doc.fillOpacity(0.3).rect(gradX1+2, currentY+83, gradWidth, 5).fill(grad6);
+
+  //value text or value
+  doc.fontSize(6).fillOpacity(1);
+  doc.fillColor("gray").text("Full-time job, B2B", gradX1+2, currentY+13);
+  doc.fillColor("gray").text("Software development", gradX1+2, currentY+23);
+  doc.fillColor("gray").text("Senior java dev", gradX1+2, currentY+33);
+  doc.fillColor("gray").text("8 hours", gradX1+2, currentY+43);
+
+  let timeSatisfaction = 7;
+  // let resilienceScore = body.req.resilienceScore;
+  doc.rect(gradX1 + valueStep*timeSatisfaction, currentY + 51, valueSignWidth, valueSightHeight).fill('gray');
+  let jobSatisfaction = 8;
+  // let sleepScore = body.req.??;
+  doc.rect(gradX1 + valueStep*jobSatisfaction, currentY + 61, valueSignWidth, valueSightHeight).fill('gray');
+  let salarySatisfaction = 5;
+  // let explosivnessScore = body.req.??;
+  doc.rect(gradX1 + valueStep*salarySatisfaction, currentY + 71, valueSignWidth, valueSightHeight).fill('gray');
+  let missionSatisfaction = 9;
+  // let explosivnessScore = body.req.??;
+  doc.rect(gradX1 + valueStep*missionSatisfaction, currentY + 81, valueSignWidth, valueSightHeight).fill('gray');
+
+
+  doc.fontSize(7).fillColor("gray").text(lorem+lorem.substring(450), textColumnX, currentY+10, {align: 'justify', width: 310});
+
+
+
+
 
 
 
