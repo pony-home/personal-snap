@@ -633,10 +633,10 @@ router.post('/', function(req, res, next) {
   let grad6 = doc.linearGradient(gradX1, currentY, gradX2, currentY);
   grad6.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
 
-  doc.fillOpacity(0.3).rect(gradX1+2, currentY+53, gradWidth, 5).fill(grad6);
-  doc.fillOpacity(0.3).rect(gradX1+2, currentY+63, gradWidth, 5).fill(grad6);
-  doc.fillOpacity(0.3).rect(gradX1+2, currentY+73, gradWidth, 5).fill(grad6);
-  doc.fillOpacity(0.3).rect(gradX1+2, currentY+83, gradWidth, 5).fill(grad6);
+  doc.fillOpacity(0.3).rect(gradX1+2, currentY+53, gradWidth-2, 5).fill(grad6);
+  doc.fillOpacity(0.3).rect(gradX1+2, currentY+63, gradWidth-2, 5).fill(grad6);
+  doc.fillOpacity(0.3).rect(gradX1+2, currentY+73, gradWidth-2, 5).fill(grad6);
+  doc.fillOpacity(0.3).rect(gradX1+2, currentY+83, gradWidth-2, 5).fill(grad6);
 
   //value text or value
   doc.fontSize(6).fillOpacity(1);
@@ -658,20 +658,80 @@ router.post('/', function(req, res, next) {
   // let explosivnessScore = body.req.??;
   doc.rect(gradX1 + valueStep*missionSatisfaction, currentY + 81, valueSignWidth, valueSightHeight).fill('gray');
 
-
   doc.fontSize(7).fillColor("gray").text(lorem+lorem.substring(450), textColumnX, currentY+10, {align: 'justify', width: 310});
 
-
-
-
-
-
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////
 
   currentY = 270;
   // FINANCE SECTION START
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight).fillOpacity(0.4).fill("gray");
   doc.fontSize(12).fillOpacity(1).fillColor('white').text("FINANCE", 260, currentY + 10);
+  // TODO: add micro font with description of Basic needs/other needs
+  // TODO: add method for color in value fields (if less/more than 40 - then green/red)
+  currentY = 300;
+  //metrics
+  //gray boxed
+  grayBoxWidth = 100;
+  doc.rect(x0, currentY+10, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+20, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+30, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+40, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+50, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+60, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+70, grayBoxWidth, 10).fillAndStroke("gray", "white");
+
+  //titles on gray background
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Monthly income", titleStartX, currentY+13);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Monthly spendings", titleStartX, currentY+23);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Income satisfaction", titleStartX, currentY+33);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Debts to income ratio", titleStartX, currentY+43);
+
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Percent of passive income", titleStartX, currentY+53);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Basic needs coverage", titleStartX, currentY+63);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Secondary needs and lusts", titleStartX, currentY+73);
+
+  //value background
+  valueRectWidth = 90;
+  gradX1 = 150;
+  gradX2 = 235;
+  doc.fillOpacity(0.2).rect(gradX1, currentY+10, valueRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+20, valueRectWidth, 10).fillAndStroke("gray", "white");
+
+  let grad7 = doc.linearGradient(gradX1, currentY, gradX2, currentY);
+  grad7.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
+
+  doc.fillOpacity(0.3).rect(gradX1, currentY+33, gradWidth, 5).fill(grad7);
+  doc.fillOpacity(0.2).rect(gradX1, currentY+40, valueRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+50, valueRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+60, valueRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+70, valueRectWidth, 10).fillAndStroke("gray", "white");
+
+  //value text or value
+  doc.fontSize(6).fillOpacity(1);
+  doc.fillColor("gray").text("30 000 zl", gradX1+2, currentY+13);
+  doc.fillColor("gray").text("15 000 zl", gradX1+2, currentY+23);
+
+  let incomeSatisfaction = 8;
+  // let resilienceScore = body.req.resilienceScore;
+  doc.rect(gradX1 + valueStep*incomeSatisfaction, currentY + 31, valueSignWidth, valueSightHeight).fill('gray');
+
+  valueStep = 9;
+  valueSightHeight = 8;
+  let debtToIncome = 2;
+  // let sleepScore = body.req.??;
+  doc.fillOpacity(0.3).rect(gradX1, currentY + 41, valueStep * debtToIncome, valueSightHeight).fill('orange');
+  let passiveIncome = 5;
+  // let explosivnessScore = body.req.??;
+  doc.fillOpacity(0.3).rect(gradX1, currentY + 51, valueStep * passiveIncome, valueSightHeight).fill('orange');
+  let basicNeeds = 10;
+  // let explosivnessScore = body.req.??;
+  doc.fillOpacity(0.3).rect(gradX1, currentY + 61, valueStep * basicNeeds, valueSightHeight).fill('orange');
+  let secondaryNeeds = 7;
+  // let explosivnessScore = body.req.??;
+  doc.fillOpacity(0.3).rect(gradX1, currentY + 71, valueStep * secondaryNeeds, valueSightHeight).fill('orange');
+
+  doc.fillOpacity(1).fontSize(7).fillColor("gray")
+  .text(lorem+lorem.substring(480), textColumnX, currentY+10, {align: 'justify', width: 310});
 
   currentY = 395;
   // HOBBIES SECTION START
