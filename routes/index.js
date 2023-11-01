@@ -21,16 +21,17 @@ router.post('/', function(req, res, next) {
   let titleBoxHeight = 30;
   let titleBoxWidth = 700;
 
-  doc.fontSize(10).fillColor('gray').text("Annual snapshot, " + new Date().getFullYear() ,500, 10, {oblique: true, lineBreak: false});
+  doc.rect(0, 0, titleBoxWidth, 60).fillOpacity(0.4).fill("gray");
+  doc.fillOpacity(0.8).fontSize(10).fillColor('white').text("Annual snapshot, " + new Date().getFullYear() ,500, 10, {oblique: true, lineBreak: false});
 
   currentY = 40;
 
   // TODO text to upper case, change font, add background
   // doc.fontSize(20).fillColor('black').text(req.body.name + "," + req.body.age + " years", 180, currentY);
-  doc.fontSize(20).fillColor('gray').text("KRISTINA, 31 years", 210, currentY).fillOpacity(1);
+  doc.fontSize(18).fillOpacity(1).fillColor('white').text("KRISTINA, 31 YEARS", 210, currentY);
 
   currentY = 75;
-  doc.roundedRect(40, currentY-5, 250, 170, 20).fillOpacity(0.3).fill("gray");
+  // doc.roundedRect(40, currentY-5, 250, 170, 20).fillOpacity(0.3).fill("gray");
   doc.fillOpacity(1).image("public/images/image.jpeg", 60, currentY, {height: 160,  align: 'center', valign: 'center'});
 
 
@@ -564,7 +565,7 @@ router.post('/', function(req, res, next) {
   doc.rect(column3X, currentY+10, markersRectWidth, 10).fillAndStroke("gray", "white");
   doc.rect(column3X, currentY+20, markersRectWidth, 10).fillAndStroke("gray", "white");
   doc.rect(column3X, currentY+30, markersRectWidth, 10).fillAndStroke("gray", "white");
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Friends amount", column3X +3, currentY+13);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Friendship satisfaction", column3X +3, currentY+13);
   doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together (amount)", column3X +3, currentY+23);
   doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together (quality)", column3X +3, currentY+33);
 
@@ -733,12 +734,76 @@ router.post('/', function(req, res, next) {
   doc.fillOpacity(1).fontSize(7).fillColor("gray")
   .text(lorem+lorem.substring(480), textColumnX, currentY+10, {align: 'justify', width: 310});
 
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   currentY = 395;
   // HOBBIES SECTION START
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight).fillOpacity(0.4).fill("gray");
   doc.fontSize(12).fillOpacity(1).fillColor('white').text("HOBBIES AND PERSONAL GROWTH", 190, currentY + 10);
 
+  // 
+// Current personal development goals
+// Topics of interest/hobbies
+// Sports 
+// Major achievments
+// Major failures
+// Time for hobbies (hours)
+// Time for hobbies (satisfaction) Score
+  currentY = 425;
+  //metrics
+  //gray boxed
+  grayBoxWidth = 100;
+  doc.rect(x0, currentY+10, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+20, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+30, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+40, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+50, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+60, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+70, grayBoxWidth, 10).fillAndStroke("gray", "white");
 
+  //titles on gray background
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Current goals", titleStartX, currentY+13);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Topics of interest/hobbies", titleStartX, currentY+23);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Sports", titleStartX, currentY+33);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Major achievments", titleStartX, currentY+43);
+
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Major failures", titleStartX, currentY+53);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time for hobbies, per week", titleStartX, currentY+63);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time for hobbies (satisfaction)", titleStartX, currentY+73);
+
+ //value background
+  valueRectWidth = 120;
+  gradX1 = 150;
+  gradX2 = 270;
+  doc.fillOpacity(0.2).rect(gradX1, currentY+10, valueRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+20, valueRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+30, valueRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+40, valueRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+50, valueRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+60, valueRectWidth, 10).fillAndStroke("gray", "white");
+  let grad8 = doc.linearGradient(gradX1, currentY, gradX2, currentY);
+  grad8.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
+  doc.fillOpacity(0.3).rect(gradX1, currentY+73, valueRectWidth, 5).fill(grad8);
+
+   //value text or value
+   doc.fontSize(6).fillOpacity(1);
+   doc.fillColor("gray").text("Body recomposition, mental stability", gradX1+2, currentY+13);
+   doc.fillColor("gray").text("Interrior design, longevity, ..", gradX1+2, currentY+23);
+   doc.fillColor("gray").text("Run, bike, strength train, joga", gradX1+2, currentY+33);
+   doc.fillColor("gray").text("major achievments", gradX1+2, currentY+43);
+   doc.fillColor("gray").text("major failures", gradX1+2, currentY+53);
+   doc.fillColor("gray").text("5 hours", gradX1+2, currentY+63);
+ 
+   let timeHobbiesSatisfaction = 7;
+   valueStep = valueRectWidth/10;
+   // let resilienceScore = body.req.resilienceScore;
+   doc.rect(gradX1 + valueStep*timeHobbiesSatisfaction, currentY + 71, valueSignWidth, valueSightHeight).fill('gray');
+
+   doc.fillOpacity(1).fontSize(7).fillColor("gray")
+   .text(lorem+lorem.substring(480), textColumnX+20, currentY+10, {align: 'justify', width: 290});
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   currentY = 525;
   // FUN SECTION START
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight).fillOpacity(0.4).fill("gray");
