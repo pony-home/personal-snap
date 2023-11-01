@@ -163,30 +163,63 @@ router.post('/', function(req, res, next) {
 
   currentY = 290;
   // AESTHETIC PART
-  // doc.rect(50, currentY, 170, 250)
-  //   .stroke();
-
   if (req.body.genderRadio === 'Female') {
-    // doc.fontSize(12).fillColor('black').text("32", 200, currentY+20);
-
-      doc.image("public/images/female.jpg", 50, currentY, {height: 240,  align: 'center', valign: 'center'});
+      doc.image("public/images/female.jpg", 85, currentY, {height: 215,  align: 'center', valign: 'center'});
   } else {  
-    doc.image("public/images/male.jpg", 50, currentY, {height: 240,  align: 'center', valign: 'center'});
+      doc.image("public/images/male.jpg", 85, currentY, {height: 215,  align: 'center', valign: 'center'});
     // doc.fontSize(10).fillColor('black').text("32", 120, currentY+50);
-    // TODO: add BMI scale on the bottom
-
   }
+
+  //body metrics
+  currentY = 513;
+  let titleWidth = 70;
+  let scoreWidth = 85;
+  let tableHeight = 10;
+  x0 = 50;
+  doc.rect(x0+10, currentY, titleWidth, tableHeight).fillAndStroke("gray", "white");
+  doc.rect(x0+10, currentY+10, titleWidth, tableHeight).fillAndStroke("gray", "white");
+  doc.rect(x0+10, currentY+20, titleWidth, tableHeight).fillAndStroke("gray", "white");
+  doc.rect(x0+10, currentY+30, titleWidth, tableHeight).fillAndStroke("gray", "white");
+  //titles
+  doc.fontSize(6).fillOpacity(1);
+  doc.fillColor("white").text("Weight", x0+13, currentY+3);
+  doc.fillColor("white").text("BMI", x0+13, currentY+13);
+  doc.fillColor("white").text("Face skin quality", x0+13, currentY+23);
+  doc.fillColor("white").text("Body skin quality", x0+13, currentY+33);
+  //value background
+  let gradX1 = 130;
+  let gradX2 = 215;
+  let aesteticGrad = doc.linearGradient(gradX1, currentY, gradX2, currentY);
+  aesteticGrad.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
+
+  doc.fillOpacity(0.2).rect(gradX1, currentY, scoreWidth, tableHeight).fillAndStroke("gray", "white");
+  // TODO: BMI scale
+  doc.fillOpacity(0.3).rect(gradX1, currentY+13, scoreWidth, 5).fill(aesteticGrad);
+  doc.rect(gradX1, currentY+23, scoreWidth, 5).fill(aesteticGrad);
+  doc.rect(gradX1, currentY+33, scoreWidth, 5).fill(aesteticGrad);
+  //values
+  doc.fontSize(6).fillOpacity(1);
+  doc.fillColor("gray").text("60 kg", gradX1 + 3, currentY+3);
+  let valueStep = scoreWidth /10;
   let valueSignWidth = 1;
   let valueSightHeight = 9;
-  let valueStep = 8.5;
+  // TODO: add calculation and appropriate scale
+  let bmiScore = 8;
+  doc.rect(gradX1 + valueStep*bmiScore, currentY + 11, valueSignWidth, valueSightHeight).fill('gray');
+  // let mobilityScore = body.req.mobilityRate1;
+  let faceSkinScore = 9;
+  doc.rect(gradX1 + valueStep*faceSkinScore, currentY + 21, valueSignWidth, valueSightHeight).fill('gray');
+  // // let mobilityScore = body.req.mobilityRate2;
+  let bodySkinScore = 9;
+  doc.rect(gradX1 + valueStep*bodySkinScore, currentY + 31, valueSignWidth, valueSightHeight).fill('gray');
+
+  valueStep = 8.5;
 
 
   // HEALTH MARKERS PART
-  doc.strokeOpacity(0.6);
-  // doc.rect(220, currentY, physicalBoxWidth, 120).stroke();
+  doc.strokeOpacity(0.6).fillOpacity(1);
   let markersRectWidth = 70;
   let markersValueRectWidth = 90;
-  let tableHeight = 10;
   currentY = 290;
   doc.fontSize(10).fillColor("gray").text("Health markers", 225, currentY);
   doc.rect(225, currentY+10, markersRectWidth, tableHeight).fillAndStroke("gray", "white");
@@ -203,7 +236,6 @@ router.post('/', function(req, res, next) {
   doc.rect(295, currentY+50, markersValueRectWidth, tableHeight).fillAndStroke("gray", "white");
   doc.rect(295, currentY+60, markersValueRectWidth, tableHeight).fillAndStroke("gray", "white");
 
-  // TODO: add units of measurments
   // TODO: add green,yellow, red background color, depending on the value (or dor after the value instead of background)
   doc.fontSize(6).fillOpacity(1);
   doc.fillColor("white").text("Blood pressure", 230, currentY+13);
@@ -247,8 +279,8 @@ router.post('/', function(req, res, next) {
   doc.fontSize(6).fillColor("white").fillOpacity(1).text("Training routine", 409, currentY+83);
 
   //value background
-  let gradX1 = 480;
-  let gradX2 = 570;
+  gradX1 = 480;
+  gradX2 = 570;
   let grad1 = doc.linearGradient(gradX1, currentY, gradX2, currentY);
   grad1.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
   doc.fillOpacity(0.3).rect(gradX1+1, currentY+13, markersValueRectWidth+3, 5).fill(grad1);
@@ -302,7 +334,7 @@ router.post('/', function(req, res, next) {
 
   doc.fontSize(6).fillColor("gray").fillOpacity(1).text("2", 320, currentY+26);
   doc.text("15", 320, currentY+36);
-  // TODDO: retrieve squats characteristics
+  // TODO: retrieve squats characteristics
   // doc.text("34 " + req.body.squatsType, 300, currentY+47);
   doc.text("34 kg" , 320, currentY+46);
 
@@ -340,8 +372,6 @@ router.post('/', function(req, res, next) {
 
   doc.fontSize(6).fillColor("gray").fillOpacity(1).text("5:00 min", 320, currentY+11);
   doc.text("23:00 mins", 320, currentY+21);
-  // TODDO: retrieve squats characteristics
-  // doc.text("34 " + req.body.squatsType, 300, currentY+47);
   doc.text("15:00 min" , 320, currentY+31);
   doc.text("15 km", 320, currentY+41);
   doc.text("85 km" , 320, currentY+51);
@@ -375,7 +405,6 @@ router.post('/', function(req, res, next) {
   doc.fillColor("white").text("Ankles mobility", 230, currentY+41);
 
   // TODO: mobility values
-
   let mobilityScore = 8;
   // let mobilityScore = body.req.mobilityRate0;
   doc.rect(gradX1 + valueStep*mobilityScore, currentY + 8, valueSignWidth, valueSightHeight).fill('gray');
