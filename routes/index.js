@@ -69,7 +69,7 @@ router.post('/', function(req, res, next) {
 
 
   // let sectionRate = req.body.healthRate;
-  let sectionRate = 8;
+  let sectionRate = 9;
   let radius = sectionRadius * sectionRate;
   let xVal2 = x0 + (angledSectionRadius * sectionRate);
   let yVal1 = y0 - radius;
@@ -80,6 +80,7 @@ router.post('/', function(req, res, next) {
     .stroke();
 
   // sectionRate = req.body.mentalRate;
+  sectionRate = 6;
   let xVal1 = x0 + (sectionRadius * sectionRate);
   radius = sectionRadius * sectionRate;
   xVal2 = x0 + (angledSectionRadius * sectionRate);
@@ -90,6 +91,7 @@ router.post('/', function(req, res, next) {
     .stroke();
 
   // sectionRate = req.body.relationsRate;
+  sectionRate = 9;
   radius = sectionRadius * sectionRate;
   xVal1 = x0 + (sectionRadius * sectionRate);
   xVal2 = x0 + (angledSectionRadius * sectionRate);
@@ -100,6 +102,7 @@ router.post('/', function(req, res, next) {
     .stroke();
 
   // sectionRate = req.body.careerRate;
+  sectionRate = 7;
   radius = sectionRadius * sectionRate;
   yVal1 = y0 + radius;
   xVal2 = x0 + (angledSectionRadius * sectionRate);
@@ -110,6 +113,7 @@ router.post('/', function(req, res, next) {
     .stroke();
 
   // sectionRate = req.body.fitnessRate;
+  sectionRate = 8;
   radius = sectionRadius * sectionRate;
   yVal1 = y0 - radius;
   xVal2 = x0 - (angledSectionRadius * sectionRate);
@@ -120,6 +124,7 @@ router.post('/', function(req, res, next) {
     .stroke();2
 
 // sectionRate = req.body.financeRate;
+  sectionRate = 4;
   radius = sectionRadius * sectionRate;
   xVal1 = x0 - (sectionRadius * sectionRate);
   xVal2 = x0 - (angledSectionRadius * sectionRate);
@@ -130,6 +135,7 @@ router.post('/', function(req, res, next) {
     .stroke();
 
 // sectionRate = req.body.hobbiesRate;
+  sectionRate = 9;
   radius = sectionRadius * sectionRate;
   xVal1 = x0 - (sectionRadius * sectionRate);
   xVal2 = x0 - (angledSectionRadius * sectionRate);
@@ -140,6 +146,7 @@ router.post('/', function(req, res, next) {
     .stroke();
 
 // sectionRate = req.body.funRate;
+  sectionRate = 10;
   radius = sectionRadius * sectionRate;
   yVal1 = y0 + radius;
   xVal2 = x0 - (angledSectionRadius * sectionRate);
@@ -165,10 +172,30 @@ router.post('/', function(req, res, next) {
   // AESTHETIC PART
   if (req.body.genderRadio === 'Female') {
       doc.image("public/images/female.jpg", 85, currentY, {height: 215,  align: 'center', valign: 'center'});
+        //body measurments
+      doc.fontSize(7).fillOpacity(1);
+      doc.fillColor("gray").text("178 cm", 70, currentY+90);
+      doc.fillColor("gray").text("35 cm", 147, currentY+38);
+      doc.fillColor("gray").text("90 cm", 160, currentY+58);
+      doc.fillColor("gray").text("32 cm", 160, currentY+67);
+      doc.fillColor("gray").text("62 cm", 160, currentY+78);
+      doc.fillColor("gray").text("93 cm", 160, currentY+96);
+      doc.fillColor("gray").text("55 cm", 158, currentY+116);
+      doc.fillColor("gray").text("37 cm", 154, currentY+159);
   } else {  
       doc.image("public/images/male.jpg", 85, currentY, {height: 215,  align: 'center', valign: 'center'});
-    // doc.fontSize(10).fillColor('black').text("32", 120, currentY+50);
+        //body measurments
+      doc.fontSize(7).fillOpacity(1);
+      doc.fillColor("gray").text("178 cm", 70, currentY+90);
+      doc.fillColor("gray").text("35 cm", 147, currentY+28);
+      doc.fillColor("gray").text("90 cm", 170, currentY+57);
+      doc.fillColor("gray").text("32 cm", 172, currentY+64);
+      doc.fillColor("gray").text("62 cm", 173, currentY+83);
+      doc.fillColor("gray").text("93 cm", 173, currentY+101);
+      doc.fillColor("gray").text("55 cm", 158, currentY+125);
+      doc.fillColor("gray").text("37 cm", 160, currentY+161);
   }
+  // 148 pelm, 600 gr miesa, 0,6 ciasta
 
   //body metrics
   currentY = 513;
@@ -607,7 +634,7 @@ router.post('/', function(req, res, next) {
   doc.fillOpacity(0.3).rect(gradX1, currentY+23, markersValueRectWidth, 5).fill(grad5);
   doc.fillOpacity(0.3).rect(gradX1, currentY+33, markersValueRectWidth, 5).fill(grad5);
   doc.fontSize(6).fillOpacity(1);
-  let friendsAmount = 7;
+  let friendsAmount = 9;
   // let resilienceScore = body.req.resilienceScore;
   doc.rect(gradX1 + valueStep*friendsAmount, currentY + 11, valueSignWidth, valueSightHeight).fill('gray');
   let friendsTime = 8;
@@ -866,9 +893,9 @@ router.post('/', function(req, res, next) {
    doc.fillColor("gray").text("List to be created", gradX1+2, currentY+63, {align: 'justify', width: 116});
    doc.fillColor("gray").text("Reading, kids, friends, sports", gradX1+2, currentY+83, {align: 'justify', width: 116});
    if (req.body.funScheduled === 'Yes') {
-      doc.fillOpacity(0.5).circle(gradX1 + 6, currentY + 105, 4).fillAndStroke("green", "green");
+      doc.fillOpacity(0.4).circle(gradX1 + 6, currentY + 105, 4).fill("green");
    } else {  
-      doc.fillOpacity(0.5).circle(gradX1 + 6, currentY + 105, 4).fillAndStroke("red", "red");
+      doc.fillOpacity(0.4).circle(gradX1 + 6, currentY + 105, 4).fill("red");
    } 
    doc.fillOpacity(1).fontSize(7).fillColor("gray")
    .text(lorem+lorem.substring(480), textColumnX+20, currentY+10, {align: 'justify', width: 290});
