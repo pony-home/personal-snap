@@ -741,14 +741,6 @@ router.post('/', function(req, res, next) {
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight).fillOpacity(0.4).fill("gray");
   doc.fontSize(12).fillOpacity(1).fillColor('white').text("HOBBIES AND PERSONAL GROWTH", 190, currentY + 10);
 
-  // 
-// Current personal development goals
-// Topics of interest/hobbies
-// Sports 
-// Major achievments
-// Major failures
-// Time for hobbies (hours)
-// Time for hobbies (satisfaction) Score
   currentY = 425;
   //metrics
   //gray boxed
@@ -808,6 +800,61 @@ router.post('/', function(req, res, next) {
   // FUN SECTION START
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight).fillOpacity(0.4).fill("gray");
   doc.fontSize(12).fillOpacity(1).fillColor('white').text("FUN AND RECREATION", 210, currentY + 10);
+
+  currentY = 555;
+  //gray boxed
+  grayBoxWidth = 100;
+  doc.rect(x0, currentY+10, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+20, grayBoxWidth, 20).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+40, grayBoxWidth, 20).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+60, grayBoxWidth, 20).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+80, grayBoxWidth, 20).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+100, grayBoxWidth, 10).fillAndStroke("gray", "white");
+
+  //titles on gray background
+  // TODO: rename titles
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Travel frequency", titleStartX, currentY+13);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("This year I saw/visited/experienced", titleStartX, currentY+23);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Amusements (rename)", titleStartX, currentY+43);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Next year I plan to see/try/visit", titleStartX, currentY+63);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("I spend free time:", titleStartX, currentY+83);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Fun is scheduled in routine", titleStartX, currentY+103);
+
+   //value background
+   valueRectWidth = 120;
+   gradX1 = 150;
+   doc.fillOpacity(0.2).rect(gradX1, currentY+10, valueRectWidth, 10).fillAndStroke("gray", "white");
+   doc.fillOpacity(0.2).rect(gradX1, currentY+20, valueRectWidth, 20).fillAndStroke("gray", "white");
+   doc.fillOpacity(0.2).rect(gradX1, currentY+40, valueRectWidth, 20).fillAndStroke("gray", "white");
+   doc.fillOpacity(0.2).rect(gradX1, currentY+60, valueRectWidth, 20).fillAndStroke("gray", "white");
+   doc.fillOpacity(0.2).rect(gradX1, currentY+80, valueRectWidth, 20).fillAndStroke("gray", "white");
+ 
+   //value text or value
+   doc.fontSize(6).fillOpacity(1);
+   doc.fillColor("gray").text("4 long travels, 1 weekend trip each month", gradX1+2, currentY+13);
+   doc.fillColor("gray").text("Turkey with kids, mountains with kids and with Vit, blabla bla", gradX1+2, currentY+23, {align: 'justify', width: 116});
+   doc.fillColor("gray").text("Museums, stand-ups, impros, ...", gradX1+2, currentY+43, {align: 'justify', width: 116});
+   doc.fillColor("gray").text("List to be created", gradX1+2, currentY+63, {align: 'justify', width: 116});
+   doc.fillColor("gray").text("Reading, kids, friends, sports", gradX1+2, currentY+83, {align: 'justify', width: 116});
+   if (req.body.funScheduled === 'Yes') {
+      doc.fillOpacity(0.5).circle(gradX1 + 6, currentY + 105, 4).fillAndStroke("green", "green");
+   } else {  
+      doc.fillOpacity(0.5).circle(gradX1 + 6, currentY + 105, 4).fillAndStroke("red", "red");
+   } 
+   doc.fillOpacity(1).fontSize(7).fillColor("gray")
+   .text(lorem+lorem.substring(480), textColumnX+20, currentY+10, {align: 'justify', width: 290});
+
+
+     //////////////////////////////////////////////////////////////////////////////////////////////////
+  currentY = 670;
+  // FUTURE ME SECTION START
+  // TODO: add field to input
+  // TODO: rename title
+  doc.rect(0, currentY, titleBoxWidth, titleBoxHeight).fillOpacity(0.4).fill("gray");
+  doc.fontSize(12).fillOpacity(1).fillColor('white').text("FUTURE KRISTINA", 230, currentY + 10);
+
+  doc.fillOpacity(1).fontSize(6).fillColor("gray")
+  .text(lorem.substring(0, 390), x0, currentY+35, {align: 'justify', width: 530});
 
 
   doc.end();
