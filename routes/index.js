@@ -32,13 +32,12 @@ router.post('/', function(req, res, next) {
 
   currentY = 75;
   // doc.roundedRect(40, currentY-5, 250, 170, 20).fillOpacity(0.3).fill("gray");
-  doc.fillOpacity(1).image("public/images/image.jpeg", 60, currentY, {height: 160,  align: 'center', valign: 'center'});
+  doc.fillOpacity(1).image("public/images/image.jpg", 110, currentY, {height: 160,  align: 'center', valign: 'center'});
 
 
 // SECTION WITH WHEEL OF LIFE - START
 // TODO: move to separate method
 // TODO: change colors
-// TODO: add titles for each section
   let x0 = 440;
   let y0 = 160;
   let sectionRadius = 8;
@@ -332,7 +331,7 @@ router.post('/', function(req, res, next) {
   doc.fillColor("gray").text("6 hours", gradX1+2, currentY+43);
   doc.fillColor("gray").text("7 trainigs", gradX1+2, currentY+53);
   doc.fillColor("gray").text("85 %", gradX1+2, currentY+63);
-  doc.fillColor("gray").text("Strength, run, bike", gradX1+2, currentY+73);
+  doc.fillColor("gray").text("Strength, run, bike, bike, bike, bike", gradX1+2, currentY+73, {width: 95});
     // TODO: define max length in input form
   doc.fillColor("gray").text(lorem.substring(0, 150), gradX1+2, currentY+83, {align: 'justify', width: 90});
 
@@ -448,7 +447,7 @@ router.post('/', function(req, res, next) {
   // SUMMARY PART
   currentY = 415;
   doc.fontSize(9).fillColor("gray").text("Summary", 405, currentY);
-  doc.fontSize(6).fillColor("gray").text(lorem, 405, currentY+10, {align: 'justify', width: 160});
+  doc.fontSize(6).fillColor("gray").text(lorem+lorem.substring(0,200), 405, currentY+10, {align: 'justify', width: 160});
 // HEALTH SECTION - END
 
 
