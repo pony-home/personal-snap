@@ -14,90 +14,128 @@
 
     h4 Romantic 
       .input-group
-        span#romantic-1-sp.input-group-text.col-sm-8 How happy you are in the relationship with partner? Score 1-10
+        span#romantic-1-sp.input-group-text.col-sm-8 How happy you are in the relationship with partner?
         input#romantic-1.form-control(
           aria-describedby="romantic-1" 
-          type="text"
+          type="number"
+          min="0"
+          max="10"
+          name="romantic1"
+          placeholder="Score 1 - 10" 
         )
         .input-group
-        //- rephrase
-        span#romantic-2-sp.input-group-text.col-sm-8 How happy you are with amount of time spent for couple time? (Score 1-10)
+        span#romantic-2-sp.input-group-text.col-sm-8 How happy you are with the amount of time spent with the partner? 
         input#romantic-2.form-control(
           aria-describedby="romantic-2" 
-          type="text"
+          type="number"
+          min="0"
+          max="10"
+          name="romantic2"
+          placeholder="Score 1 - 10" 
         )
         .input-group
-        span#romantic-4-sp.input-group-text.col-sm-8 How happy you are with quality of couple time? (Score 1-10)
+        span#romantic-4-sp.input-group-text.col-sm-8 How happy you are with quality of time spent with the partner?
         input#romantic-4.form-control(
           aria-describedby="romantic-4" 
-          type="text"
+          type="number"
+          min="0"
+          max="10"
+          name="romantic4"
+          placeholder="Score 1 - 10" 
         )
         .input-group
         span#romantic-3-sp.input-group-text.col-sm-2 Note
-        input#romantic-3.form-control(
+        textarea#romantic-3.form-control(
           aria-describedby="romantic-3" 
-          placeholder="TODO, Current state of things (how much time for 2, how do you spend time togeather, ability to solve problems, common future vision, etc,)"
-          type="text"
+          cols="33" 
+          rows="5" 
+          name="romantic3"
+          maxlength=420
+          placeholder="Current state of things (how much time for 2, how do you spend time togeather, ability to solve problems, common future vision, etc)"
         )
 
     h4 Family 
 
        .input-group
-        span#family-1-sp.input-group-text.col-sm-8 Atmosphere at home (Score 1-10)
+        span#family-1-sp.input-group-text.col-sm-8 Atmosphere at home
         input#family-1.form-control(
           aria-describedby="family-1" 
-          type="text"
+          type="number"
+          min="0"
+          max="10"
+          name="family1"
+          placeholder="Score 1 - 10" 
         )
         .input-group
-        //- rephrase
-        span#family-2-sp.input-group-text.col-sm-8 How happy you are with amount of time spent with family? (Score 1-10)
+        span#family-2-sp.input-group-text.col-sm-8 How happy you are with the amount of time spent with family?
         input#family-2.form-control(
           aria-describedby="family-2" 
-          type="text"
+          type="number"
+          min="0"
+          max="10"
+          name="family2"
+          placeholder="Score 1 - 10" 
         )
         .input-group
-        span#family-4-sp.input-group-text.col-sm-8 How happy you are with quality of time spent with family? (Score 1-10)
+        span#family-4-sp.input-group-text.col-sm-8 How happy you are with the quality of time spent with family?
         input#family-4.form-control(
           aria-describedby="family-4" 
-          type="text"
+          type="number"
+          min="0"
+          max="10"
+          name="family4"
+          placeholder="Score 1 - 10" 
         )
         .input-group
         span#family-3-sp.input-group-text.col-sm-2 Note
-        input#family-3.form-control(
+        textarea#family-3.form-control(
           aria-describedby="family-3" 
-          placeholder="TODO, Current state of things (how much time spent with family and how, ability to resolve conflicts, relationship with relatives, etc"
-          type="text"
+          cols="33" 
+          rows="5" 
+          name="family3"
+          maxlength=420
+          placeholder="Current state of things (how much time being spent with family and how, ability to resolve conflicts, relationship with relatives, etc"
         )
 
     h4 Friends
 
        .input-group
-        //- rephrase
-        span#friends-1-sp.input-group-text.col-sm-8 How happy you are with amount of close friends? Score 1-10
+        span#friends-1-sp.input-group-text.col-sm-8 How happy you are with relations with your friends?
         input#friends-1.form-control(
           aria-describedby="friends-1" 
-          type="text"
+          type="number"
+          min="0"
+          max="10"
+          name="friends1"
+          placeholder="Score 1 - 10" 
         )
         .input-group
-        //- rephrase
-        span#friends-2-sp.input-group-text.col-sm-8 How happy you are with amount of time spent with friends? (Score 1-10)
+        span#friends-2-sp.input-group-text.col-sm-8 How happy you are with the amount of time spent with friends? 
         input#friends-2.form-control(
           aria-describedby="friends-2" 
-          type="text"
+          type="number"
+          min="0"
+          max="10"
+          name="friends2"
+          placeholder="Score 1 - 10" 
         )
         .input-group
-        span#friends-4-sp.input-group-text.col-sm-8 How happy you are with quality of time spent with friends? (Score 1-10)
+        span#friends-4-sp.input-group-text.col-sm-8 How happy you are with the quality of time spent with friends?
         input#friends-4.form-control(
           aria-describedby="friends-4" 
-          type="text"
+          type="number"
+          min="0"
+          max="10"
+          name="friends4"
+          placeholder="Score 1 - 10" 
         )
         .input-group
         span#friends-3-sp.input-group-text.col-sm-2 Note
-        input#friends-3.form-control(
+        textarea#friends-3.form-control(
           aria-describedby="friends-3" 
-          placeholder="TODO, Сurrent state of things (how much time spent with friends and how, how much close friends in your life, etc, "
-          type="text"
+          cols="33" 
+          rows="5" 
+          name="friends3"
+          maxlength=420
+          placeholder="Сurrent state of things (how much time spent with friends and how, how much close friends in your life, how happy you are with your close environment, etc)"
         )
-
-
-        //- add required for all rate this area fields
