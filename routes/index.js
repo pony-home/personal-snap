@@ -834,7 +834,7 @@ router.post('/', function(req, res, next) {
 
    //value text or value
    doc.fontSize(6).fillOpacity(1);
-   doc.fillColor("gray").text("Body recomposition, mental stability", gradX1+2, currentY+13);
+   doc.fillColor("gray").text("Body recomposition, mental stability stability", gradX1+2, currentY+13);
    doc.fillColor("gray").text("Interrior design, longevity, ..", gradX1+2, currentY+23);
    doc.fillColor("gray").text("Run, bike, strength train, joga", gradX1+2, currentY+33);
    doc.fillColor("gray").text("major achievments", gradX1+2, currentY+43);

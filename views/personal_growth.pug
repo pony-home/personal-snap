@@ -13,68 +13,76 @@
         )
 
         .input-group
-        //- rephrase
         span#personal-2-sp.input-group-text.col-sm-8 What are your current goals in terms of personal development?
         input#personal-2.form-control(
           aria-describedby="personal-2" 
+          maxlength=46
+          name="personal2"
           type="text"
         )
         .input-group
-        //- rephrase
         span#personal-3-sp.input-group-text.col-sm-8 What are your current, not related to job, topics of interest? 
         input#personal-3.form-control(
           aria-describedby="personal-3" 
           type="text"
+          maxlength=46
+          name="personal2"
         )
 
         .input-group
-        //- rephrase
-        span#personal-4-sp.input-group-text.col-sm-9 How happy you are with the amount of time you spend on your personal development goals? (Score 1-10)
+        span#personal-4-sp.input-group-text.col-sm-9 How happy you are with the amount of time you spend on your personal development goals?
         input#personal-4.form-control(
           aria-describedby="personal-4" 
-          type="text"
+          type="number"
+          min="0"
+          max="10"
+          name="personal4"
+          placeholder="Score 1 - 10" 
         )
         .input-group
-        //- rephrase
-        span#personal-5-sp.input-group-text.col-sm-8 How much time weekly can you take on this? hours
+        span#personal-5-sp.input-group-text.col-sm-8 How much time weekly can you spend on personal development and hobbies? 
         input#personal-5.form-control(
           aria-describedby="personal-5" 
           type="text"
-          placeholder=""
+          maxlength=46
+          name="personal5"
+          placeholder="Hours per week"
         )
 
         .input-group
-        //- rephrase
-        span#personal-6-sp.input-group-text.col-sm-8 What are your major achievements in this area (during last year)? 
+        span#personal-6-sp.input-group-text.col-sm-8 What are your major achievements in this area within last year? 
         input#personal-6.form-control(
           aria-describedby="personal-6" 
           type="text"
+          maxlength=46
+          name="personal6"
         )
 
         .input-group
-        //- rephrase
-        span#personal-7-sp.input-group-text.col-sm-8 What are your major fuckups in this area? 
+        span#personal-7-sp.input-group-text.col-sm-8 What are your major failures in this area? 
         input#personal-7.form-control(
           aria-describedby="personal-7" 
           type="text"
+          maxlength=46
+          name="personal7"
         )
 
         .input-group
-        //- rephrase
         span#personal-8-sp.input-group-text.col-sm-8 What sports do you practice?
         input#personal-8.form-control(
           aria-describedby="personal-8" 
           type="text"
+          maxlength=46
+          name="personal8"
         )
 
         .input-group
         span#personal-9-sp.input-group-text.col-sm-2 Note
-        input#personal-9.form-control(
+        textarea#personal-9.form-control(
           aria-describedby="personal-9" 
-          placeholder="TODO, Current state of things (do you have enough time, what are your passions, anything important, etc)"
-          type="text"
+          cols="33" 
+          rows="5" 
+          name="personal9"
+          maxlength=1000
+          placeholder="Current state of things (do you have enough time, what are your passions, anything important, etc)"
         )
-
-
-//- TODO add placeholders
-//- TODO rephrase all questions
