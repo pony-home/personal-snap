@@ -17,70 +17,86 @@
         span#career-1-sp.input-group-text.col-sm-8 How do you earn money? 
         input#career-1.form-control(
           aria-describedby="career-1" 
+          maxlength=35
           type="text"
+          name="career1"
         )
         .input-group
-        //- rephrase
         span#career-2-sp.input-group-text.col-sm-8 What is your career path?
         input#career-2.form-control(
           aria-describedby="career-2" 
           type="text"
+          maxlength=35
+          name="career2"
         )
         .input-group
-        //- rephrase
         span#career-21-sp.input-group-text.col-sm-8 What is your role in the team? 
         input#career-21.form-control(
           aria-describedby="career-21" 
           type="text"
+          maxlength=35
+          name="career21"
         )
         .input-group
-        //- rephrase
-        span#career-3-sp.input-group-text.col-sm-8 How happy satisfied you with your job/career? (Score 1-10)
+        span#career-3-sp.input-group-text.col-sm-8 How satisfied you are with your job/career?
         input#career-3.form-control(
           aria-describedby="career-3" 
-          type="text"
+          type="number"
+          min="0"
+          max="10"
+          name="career3"
+          placeholder="Score 1 - 10" 
         )
 
         .input-group
-        //- rephrase
-        span#career-4-sp.input-group-text.col-sm-8 Do you earn enough for a living? (Score 1-10)
+        span#career-4-sp.input-group-text.col-sm-8 How satisfied you are with your earnings?
         input#career-4.form-control(
           aria-describedby="career-4" 
-          type="text"
+          type="number"
+          min="0"
+          max="10"
+          name="career4"
+          placeholder="Score 1 - 10" 
         )
         .input-group
-        //- rephrase
-        span#career-5-sp.input-group-text.col-sm-8 Do you feel like your career choice correspond to your life mission? (Score 1-10)
+        span#career-5-sp.input-group-text.col-sm-8 Do you feel like your career choice correspond to your life mission?
         input#career-5.form-control(
           aria-describedby="career-5" 
-          type="text"
-          placeholder=""
+          type="number"
+          min="0"
+          max="10"
+          name="career5"
+          placeholder="Score 1 - 10" 
         )
 
         .input-group
-        //- rephrase
-        span#career-6-sp.input-group-text.col-sm-8 How much time weekly do you spend for your job/career? (Weekly average)
+        span#career-6-sp.input-group-text.col-sm-8 How much time do you spend for your job/career? Hours per week
         input#career-6.form-control(
           aria-describedby="career-6" 
           type="text"
+          maxlength=35
+          name="career21"
         )
 
         .input-group
-        //- rephrase
-        span#career-7-sp.input-group-text.col-sm-8 Are you happy with amount of time spend for your job? (Score 1-10)
+        span#career-7-sp.input-group-text.col-sm-8 How happy you are with the amount of time spend for your job?
         input#career-7.form-control(
           aria-describedby="career-7" 
-          type="text"
+          type="number"
+          min="0"
+          max="10"
+          name="career7"
+          placeholder="Score 1 - 10" 
         )
 
         .input-group
         span#career-8-sp.input-group-text.col-sm-2 Note
-        input#career-8.form-control(
+        textarea#career-8.form-control(
           aria-describedby="career-8" 
-          placeholder="TODO, Current state of things (what is your job/career path, any thoughts about changes in career, etc)"
+          cols="33" 
+          rows="5" 
+          name="career8"
+          maxlength=1100
+          placeholder="Current state of things (what is your job/career path, any thoughts about changes in career, etc)"
           type="text"
         )
-
-
-//- TODO add placeholders
-//- TODO rephrase all questions

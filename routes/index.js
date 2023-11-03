@@ -696,7 +696,7 @@ router.post('/', function(req, res, next) {
 
   //value text or value
   doc.fontSize(6).fillOpacity(1);
-  doc.fillColor("gray").text("Full-time job, B2B", gradX1+2, currentY+13);
+  doc.fillColor("gray").text("Full-time job, B2B, Full-time job", gradX1+2, currentY+13);
   doc.fillColor("gray").text("Software development", gradX1+2, currentY+23);
   doc.fillColor("gray").text("Senior java dev", gradX1+2, currentY+33);
   doc.fillColor("gray").text("8 hours", gradX1+2, currentY+43);

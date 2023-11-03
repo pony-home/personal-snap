@@ -39,6 +39,7 @@
           type="number"
           min="0"
           max="10"
+          name="explosivnessScore"
           placeholder="Score 1 - 10" 
         )
         .input-group
@@ -48,7 +49,8 @@
           type="number"
           min="0"
           max="10"
-          placeholder="1-very easy, no problem at all, 10 - I don't accept people failures"
+          name="compassionScore"
+          placeholder="1-very easy, no problem at all, 10 - people are not allowed to fail"
         )
 
         .input-group
@@ -58,6 +60,7 @@
           type="number"
           min="0"
           max="10"
+          name="happinessScore"
           placeholder="Score 1 - 10" 
         )
 
@@ -68,6 +71,7 @@
           type="number"
           min="0"
           max="10"
+          name="anxietyScore"
           placeholder="Score 1 - 10" 
         )
 
@@ -78,6 +82,7 @@
           type="number"
           min="0"
           max="10"
+          name="socialScore"
           placeholder="Score 1 - 10" 
         )
 
@@ -88,6 +93,7 @@
           type="number"
           min="0"
           max="10"
+          name="confidenceScore"
           placeholder="Score 1 - 10" 
         )        
 
@@ -98,16 +104,17 @@
           type="number"
           min="0"
           max="10"
+          name="willpowerScore"
           placeholder="Score 1 - 10" 
         )        
 
         .input-group
         span#mental-11-sp.input-group-text.col-sm-2 Note
-        input#mental-11.form-control(
+        textarea#mental-11.form-control(
           aria-describedby="mental-11" 
-          placeholder="How do you feel about your life, your emotions, overall mental state, acceptance, confidence"
-          type="text"
+          cols="33" 
+          rows="5" 
+          name="mental11"
+          maxlength=1200
+          placeholder="How do you feel about your life, your emotions, overall mental state, acceptance, confidence, etc"
         )
-
-
-//- TODO add placeholders
