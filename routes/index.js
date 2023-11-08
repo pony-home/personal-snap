@@ -9,8 +9,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 
-  const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in suscipit purus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus nec hendrerit felis. Morbi aliquam facilisis risus eu lacinia. Sed eu leo in turpis fringilla hendrerit. Ut nec accumsan nisl. Suspendisse rhoncus nisl posuere tortor tempus et dapibus elit porta. Cras leo neque, elementum a rhoncus ut, vestibulum non nibh. Phasellus pretium justo turpis. Etiam vulputate, odio vitae tincidunt ultricies, eros odio dapibus nisi, ut tincidunt lacus arcu eu elit. Aenean velit erat, vehicula eget lacinia ut, dignissim non tellus. Aliquam nec lacus mi, sed vestibulum nunc. Suspendisse potenti. Curabitur vitae sem turpis.';
-
   let fileName = 'Annual snapshot'
   res.setHeader('Content-disposition', 'inline; filename='+ fileName +'.pdf');
 
@@ -26,8 +24,7 @@ router.post('/', function(req, res, next) {
 
   currentY = 40;
 
-  // TODO text to upper case, change font, add background
-  doc.fontSize(18).fillOpacity(1).fillColor('white').text(req.body.name + ", " + req.body.age + " YEARS", 210, currentY);
+  doc.fontSize(18).fillOpacity(1).fillColor('white').text(req.body.name.toUpperCase() + ", " + req.body.age + " YEARS", 210, currentY);
 
   currentY = 75;
   // TODO add image upload
@@ -363,9 +360,9 @@ router.post('/', function(req, res, next) {
   doc.rect(315, currentY+68, fitnessValueRectWidth, 10).fillAndStroke("gray", "white");
   doc.rect(315, currentY+78, fitnessValueRectWidth, 10).fillAndStroke("gray", "white");
 
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Fastest "+ req.body.prdist1 + req.body.prtype1, 230, currentY+11);
-  doc.fillColor("white").text("Fastest "+ req.body.prdist2 + req.body.prtype2, 230, currentY+21);
-  doc.fillColor("white").text("Fastest "+ req.body.prdist3 + req.body.prtype3, 230, currentY+31);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Fastest "+ req.body.prdist1 + " " + req.body.prtype1, 230, currentY+11);
+  doc.fillColor("white").text("Fastest "+ req.body.prdist2 + " " + req.body.prtype2, 230, currentY+21);
+  doc.fillColor("white").text("Fastest "+ req.body.prdist3 + " " + req.body.prtype3, 230, currentY+31);
   doc.fillColor("white").text("Longest distance (" + req.body.longesttype1 +")", 230, currentY+41);
   doc.fillColor("white").text("Longest distance (" + req.body.longesttype2 +")", 230, currentY+51);
   doc.fillColor("white").text("Yearly mileage (" + req.body.yearlytype1 +")", 230, currentY+61);
@@ -405,13 +402,13 @@ router.post('/', function(req, res, next) {
   doc.fillColor("white").text("Hips mobility", 230, currentY+31);
   doc.fillColor("white").text("Ankles mobility", 230, currentY+41);
 
-  let mobilityScore = body.req.mobilityRate0;
+  let mobilityScore = req.body.mobilityRate0;
   doc.rect(gradX1 + valueStep*mobilityScore, currentY + 8, valueSignWidth, valueSightHeight).fill('gray');
-  mobilityScore = body.req.mobilityRate1;
+  mobilityScore = req.body.mobilityRate1;
   doc.rect(gradX1 + valueStep*mobilityScore, currentY + 18, valueSignWidth, valueSightHeight).fill('gray');
-  mobilityScore = body.req.mobilityRate2;
+  mobilityScore = req.body.mobilityRate2;
   doc.rect(gradX1 + valueStep*mobilityScore, currentY + 28, valueSignWidth, valueSightHeight).fill('gray');
-  mobilityScore = body.req.mobilityRate3;
+  mobilityScore = req.body.mobilityRate3;
   doc.rect(gradX1 + valueStep*mobilityScore, currentY + 38, valueSignWidth, valueSightHeight).fill('gray');
 
   // SUMMARY PART
@@ -478,43 +475,33 @@ router.post('/', function(req, res, next) {
 
   //value text or value
   doc.fontSize(6).fillOpacity(1);
-  let resilienceScore = 7;
-  // let resilienceScore = body.req.resilienceScore;
+  let resilienceScore = req.body.resilienceScore;
   doc.rect(gradX1 + valueStep*resilienceScore, currentY + 11, valueSignWidth, valueSightHeight).fill('gray');
-  let positivityScore = 8;
-  // let sleepScore = body.req.??;
+  let positivityScore = req.body.positivityScore;
   doc.rect(gradX1 + valueStep*positivityScore, currentY + 21, valueSignWidth, valueSightHeight).fill('gray');
-  let compassionScore = 5;
-  // let explosivnessScore = body.req.??;
+  let compassionScore = req.body.compassionScore;
   doc.rect(gradX1 + valueStep*compassionScore, currentY + 31, valueSignWidth, valueSightHeight).fill('gray');
-  let happinessScore = 9;
-  // let explosivnessScore = body.req.??;
+  let happinessScore = req.body.happinessScore;
   doc.rect(gradX1 + valueStep*happinessScore, currentY + 41, valueSignWidth, valueSightHeight).fill('gray');
-  let socialScore = 8;
-  // let explosivnessScore = body.req.??;
+  let socialScore = req.body.socialScore;
   doc.rect(gradX1 + valueStep*socialScore, currentY + 51, valueSignWidth, valueSightHeight).fill('gray');
-  let confidenceScore = 9;
-  // let explosivnessScore = body.req.??;
+  let confidenceScore = req.body.confidenceScore;
   doc.rect(gradX1 + valueStep*confidenceScore, currentY + 61, valueSignWidth, valueSightHeight).fill('gray');
-  let willpowerScore = 6;
-  // let explosivnessScore = body.req.??;
+  let willpowerScore = req.body.willpowerScore;
   doc.rect(gradX1 + valueStep*willpowerScore, currentY + 71, valueSignWidth, valueSightHeight).fill('gray');
-  let anxietyScore = 7;
-// let explosivnessScore = body.req.??;
+  let anxietyScore = req.body.anxietyScore;
   doc.rect(gradX1 + valueStep*anxietyScore, currentY + 81, valueSignWidth, valueSightHeight).fill('gray');
-  let explosivnessScore = 5;
-  // let explosivnessScore = body.req.??;
+  let explosivnessScore = req.body.explosivnessScore;
   doc.rect(gradX1 + valueStep*explosivnessScore, currentY + 91, valueSignWidth, valueSightHeight).fill('gray');
 
   let textColumnX = 260;
-  doc.fontSize(7).fillColor("gray").text(lorem+lorem.substring(250), textColumnX, currentY+10, {align: 'justify', width: 310});
+  doc.fontSize(7).fillColor("gray").text(req.body.mental11, textColumnX, currentY+10, {align: 'justify', width: 310});
   
 
 /////////////////////////////////////////////////////////////////////
   doc.addPage();
   currentY = 10;
   // RELATIONSHIPS SECTION START
-  // TODO: add time quality + time amount metrics (instead of 1 time metric)
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight)
     .fillOpacity(0.4)
     .fill("gray");
@@ -544,16 +531,13 @@ router.post('/', function(req, res, next) {
   doc.fillOpacity(0.3).rect(gradX1, currentY+23, markersValueRectWidth, 5).fill(grad5);
   doc.fillOpacity(0.3).rect(gradX1, currentY+33, markersValueRectWidth, 5).fill(grad5);
   doc.fontSize(6).fillOpacity(1);
-  let romanticSatisfaction = 7;
-  // let resilienceScore = body.req.resilienceScore;
+  let romanticSatisfaction = req.body.romantic1;
   doc.rect(gradX1 + valueStep*romanticSatisfaction, currentY + 11, valueSignWidth, valueSightHeight).fill('gray');
-  let romanticTimeAmount = 8;
-  // let resilienceScore = body.req.resilienceScore;
+  let romanticTimeAmount = req.body.romantic2;
   doc.rect(gradX1 + valueStep*romanticTimeAmount, currentY + 21, valueSignWidth, valueSightHeight).fill('gray');
-  let romanticTimeQuality = 8;
-  // let resilienceScore = body.req.resilienceScore;
+  let romanticTimeQuality = req.body.romantic4;
   doc.rect(gradX1 + valueStep*romanticTimeQuality, currentY + 31, valueSignWidth, valueSightHeight).fill('gray');
-  doc.fontSize(6).fillColor("gray").text(lorem.substring(0, 400), column1X, currentY+45, {align: 'justify', width: 165});
+  doc.fontSize(6).fillColor("gray").text(req.body.romantic3, column1X, currentY+45, {align: 'justify', width: 165});
 
 
   //family
@@ -574,16 +558,13 @@ router.post('/', function(req, res, next) {
   doc.fillOpacity(0.3).rect(gradX1, currentY+23, markersValueRectWidth, 5).fill(grad5);
   doc.fillOpacity(0.3).rect(gradX1, currentY+33, markersValueRectWidth, 5).fill(grad5);
   doc.fontSize(6).fillOpacity(1);
-  let familyAtmosphere = 7;
-  // let resilienceScore = body.req.resilienceScore;
+  let familyAtmosphere = req.body.family1;
   doc.rect(gradX1 + valueStep*familyAtmosphere, currentY + 11, valueSignWidth, valueSightHeight).fill('gray');
-  let familyTime = 8;
-  // let resilienceScore = body.req.resilienceScore;
+  let familyTime = req.body.family2;
   doc.rect(gradX1 + valueStep*familyTime, currentY + 21, valueSignWidth, valueSightHeight).fill('gray');
-  let familyTimeQuality = 8;
-  // let resilienceScore = body.req.resilienceScore;
+  let familyTimeQuality = req.body.family4;
   doc.rect(gradX1 + valueStep*familyTimeQuality, currentY + 31, valueSignWidth, valueSightHeight).fill('gray');
-  doc.fontSize(6).fillColor("gray").text(lorem.substring(0, 400), column2X, currentY+45, {align: 'justify', width: 165});
+  doc.fontSize(6).fillColor("gray").text(req.body.family3, column2X, currentY+45, {align: 'justify', width: 165});
 
   //friends
   doc.fontSize(9).fillColor("gray").text("Friends", column3X, currentY);
@@ -603,16 +584,13 @@ router.post('/', function(req, res, next) {
   doc.fillOpacity(0.3).rect(gradX1, currentY+23, markersValueRectWidth, 5).fill(grad5);
   doc.fillOpacity(0.3).rect(gradX1, currentY+33, markersValueRectWidth, 5).fill(grad5);
   doc.fontSize(6).fillOpacity(1);
-  let friendsAmount = 9;
-  // let resilienceScore = body.req.resilienceScore;
+  let friendsAmount = req.body.friends1;
   doc.rect(gradX1 + valueStep*friendsAmount, currentY + 11, valueSignWidth, valueSightHeight).fill('gray');
-  let friendsTime = 8;
-  // let resilienceScore = body.req.resilienceScore;
+  let friendsTime = req.body.friends2;
   doc.rect(gradX1 + valueStep*friendsTime, currentY + 21, valueSignWidth, valueSightHeight).fill('gray');
-  let friendsTimeQuality = 8;
-  // let resilienceScore = body.req.resilienceScore;
+  let friendsTimeQuality = req.body.friends4;
   doc.rect(gradX1 + valueStep*friendsTimeQuality, currentY + 31, valueSignWidth, valueSightHeight).fill('gray');
-  doc.fontSize(6).fillColor("gray").text(lorem.substring(0, 400), column3X, currentY+45, {align: 'justify', width: 165});
+  doc.fontSize(6).fillColor("gray").text(req.body.friends3, column3X, currentY+45, {align: 'justify', width: 165});
 
 
 
@@ -666,25 +644,21 @@ router.post('/', function(req, res, next) {
 
   //value text or value
   doc.fontSize(6).fillOpacity(1);
-  doc.fillColor("gray").text("Full-time job, B2B, Full-time job", gradX1+2, currentY+13);
-  doc.fillColor("gray").text("Software development", gradX1+2, currentY+23);
-  doc.fillColor("gray").text("Senior java dev", gradX1+2, currentY+33);
-  doc.fillColor("gray").text("8 hours", gradX1+2, currentY+43);
+  doc.fillColor("gray").text(req.body.career1, gradX1+2, currentY+13);
+  doc.fillColor("gray").text(req.body.career2, gradX1+2, currentY+23);
+  doc.fillColor("gray").text(req.body.career21, gradX1+2, currentY+33);
+  doc.fillColor("gray").text(req.body.career6, gradX1+2, currentY+43);
 
-  let timeSatisfaction = 7;
-  // let resilienceScore = body.req.resilienceScore;
+  let timeSatisfaction = req.body.career7;
   doc.rect(gradX1 + valueStep*timeSatisfaction, currentY + 51, valueSignWidth, valueSightHeight).fill('gray');
-  let jobSatisfaction = 8;
-  // let sleepScore = body.req.??;
+  let jobSatisfaction = req.body.career3;
   doc.rect(gradX1 + valueStep*jobSatisfaction, currentY + 61, valueSignWidth, valueSightHeight).fill('gray');
-  let salarySatisfaction = 5;
-  // let explosivnessScore = body.req.??;
+  let salarySatisfaction = req.body.career4;
   doc.rect(gradX1 + valueStep*salarySatisfaction, currentY + 71, valueSignWidth, valueSightHeight).fill('gray');
-  let missionSatisfaction = 9;
-  // let explosivnessScore = body.req.??;
+  let missionSatisfaction = req.body.career5;
   doc.rect(gradX1 + valueStep*missionSatisfaction, currentY + 81, valueSignWidth, valueSightHeight).fill('gray');
 
-  doc.fontSize(7).fillColor("gray").text(lorem+lorem.substring(450), textColumnX, currentY+10, {align: 'justify', width: 310});
+  doc.fontSize(7).fillColor("gray").text(req.body.career8, textColumnX, currentY+10, {align: 'justify', width: 310});
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -734,30 +708,25 @@ router.post('/', function(req, res, next) {
 
   //value text or value
   doc.fontSize(6).fillOpacity(1);
-  doc.fillColor("gray").text("30 000 zl", gradX1+2, currentY+13);
-  doc.fillColor("gray").text("15 000 zl", gradX1+2, currentY+23);
+  doc.fillColor("gray").text(req.body.finance2, gradX1+2, currentY+13);
+  doc.fillColor("gray").text(req.body.finance3, gradX1+2, currentY+23);
 
-  let incomeSatisfaction = 8;
-  // let resilienceScore = body.req.resilienceScore;
+  let incomeSatisfaction = req.body.finance1;
   doc.rect(gradX1 + valueStep*incomeSatisfaction, currentY + 31, valueSignWidth, valueSightHeight).fill('gray');
 
-  valueStep = 9;
+  valueStep = valueRectWidth/100;
   valueSightHeight = 8;
-  let debtToIncome = 2;
-  // let sleepScore = body.req.??;
+  let debtToIncome = req.body.finance4;
   doc.fillOpacity(0.3).rect(gradX1, currentY + 41, valueStep * debtToIncome, valueSightHeight).fill('orange');
-  let passiveIncome = 5;
-  // let explosivnessScore = body.req.??;
+  let passiveIncome = req.body.finance5;
   doc.fillOpacity(0.3).rect(gradX1, currentY + 51, valueStep * passiveIncome, valueSightHeight).fill('orange');
-  let basicNeeds = 10;
-  // let explosivnessScore = body.req.??;
+  let basicNeeds = req.body.finance6;
   doc.fillOpacity(0.3).rect(gradX1, currentY + 61, valueStep * basicNeeds, valueSightHeight).fill('orange');
-  let secondaryNeeds = 7;
-  // let explosivnessScore = body.req.??;
+  let secondaryNeeds = req.body.finance7;
   doc.fillOpacity(0.3).rect(gradX1, currentY + 71, valueStep * secondaryNeeds, valueSightHeight).fill('orange');
 
   doc.fillOpacity(1).fontSize(7).fillColor("gray")
-  .text(lorem+lorem.substring(480), textColumnX, currentY+10, {align: 'justify', width: 310});
+  .text(req.body.finance8, textColumnX, currentY+10, {align: 'justify', width: 310});
 
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -804,20 +773,19 @@ router.post('/', function(req, res, next) {
 
    //value text or value
    doc.fontSize(6).fillOpacity(1);
-   doc.fillColor("gray").text("Body recomposition, mental stability stability", gradX1+2, currentY+13);
-   doc.fillColor("gray").text("Interrior design, longevity, ..", gradX1+2, currentY+23);
-   doc.fillColor("gray").text("Run, bike, strength train, joga", gradX1+2, currentY+33);
-   doc.fillColor("gray").text("major achievments", gradX1+2, currentY+43);
-   doc.fillColor("gray").text("major failures", gradX1+2, currentY+53);
-   doc.fillColor("gray").text("5 hours", gradX1+2, currentY+63);
+   doc.fillColor("gray").text(req.body.personal2, gradX1+2, currentY+13);
+   doc.fillColor("gray").text(req.body.personal3, gradX1+2, currentY+23);
+   doc.fillColor("gray").text(req.body.personal8, gradX1+2, currentY+33);
+   doc.fillColor("gray").text(req.body.personal6, gradX1+2, currentY+43);
+   doc.fillColor("gray").text(req.body.personal7, gradX1+2, currentY+53);
+   doc.fillColor("gray").text(req.body.personal5, gradX1+2, currentY+63);
  
-   let timeHobbiesSatisfaction = 7;
+   let timeHobbiesSatisfaction = req.body.personal4;
    valueStep = valueRectWidth/10;
-   // let resilienceScore = body.req.resilienceScore;
    doc.rect(gradX1 + valueStep*timeHobbiesSatisfaction, currentY + 71, valueSignWidth, valueSightHeight).fill('gray');
 
    doc.fillOpacity(1).fontSize(7).fillColor("gray")
-   .text(lorem+lorem.substring(480), textColumnX+20, currentY+10, {align: 'justify', width: 290});
+   .text(req.body.personal9, textColumnX+20, currentY+10, {align: 'justify', width: 290});
 
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -856,30 +824,28 @@ router.post('/', function(req, res, next) {
  
    //value text or value
    doc.fontSize(6).fillOpacity(1);
-   doc.fillColor("gray").text("4 long travels, 1 weekend trip each month", gradX1+2, currentY+13);
-   doc.fillColor("gray").text("Turkey with kids, mountains with kids and with Vit, blabla bla", gradX1+2, currentY+23, {align: 'justify', width: 116});
-   doc.fillColor("gray").text("Museums, stand-ups, impros, ...", gradX1+2, currentY+43, {align: 'justify', width: 116});
-   doc.fillColor("gray").text("List to be created", gradX1+2, currentY+63, {align: 'justify', width: 116});
-   doc.fillColor("gray").text("Reading, kids, friends, sports", gradX1+2, currentY+83, {align: 'justify', width: 116});
-   if (req.body.funScheduled === 'Yes') {
+   doc.fillColor("gray").text(req.body.fun2, gradX1+2, currentY+13);
+   doc.fillColor("gray").text(req.body.fun3, gradX1+2, currentY+23, {align: 'justify', width: 116});
+   doc.fillColor("gray").text(req.body.fun31, gradX1+2, currentY+43, {align: 'justify', width: 116});
+   doc.fillColor("gray").text(req.body.fun4, gradX1+2, currentY+63, {align: 'justify', width: 116});
+   doc.fillColor("gray").text(req.body.fun5, gradX1+2, currentY+83, {align: 'justify', width: 116});
+   if (req.body.funincluded === 'Yes') {
       doc.fillOpacity(0.4).circle(gradX1 + 6, currentY + 105, 4).fill("green");
    } else {  
       doc.fillOpacity(0.4).circle(gradX1 + 6, currentY + 105, 4).fill("red");
    } 
    doc.fillOpacity(1).fontSize(7).fillColor("gray")
-   .text(lorem+lorem.substring(480), textColumnX+20, currentY+10, {align: 'justify', width: 290});
+   .text(req.body.fun8, textColumnX+20, currentY+10, {align: 'justify', width: 290});
 
 
      //////////////////////////////////////////////////////////////////////////////////////////////////
   currentY = 670;
   // FUTURE ME SECTION START
-  // TODO: add field to input
-  // TODO: rename title
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight).fillOpacity(0.4).fill("gray");
-  doc.fontSize(12).fillOpacity(1).fillColor('white').text("FUTURE KRISTINA", 230, currentY + 10);
+  doc.fontSize(12).fillOpacity(1).fillColor('white').text("FUTURE " + req.body.name , 230, currentY + 10);
 
   doc.fillOpacity(1).fontSize(6).fillColor("gray")
-  .text(lorem.substring(0, 390), x0, currentY+35, {align: 'justify', width: 530});
+  .text(req.body.futureyou, x0, currentY+35, {align: 'justify', width: 530});
 
 
   doc.end();
@@ -887,5 +853,3 @@ router.post('/', function(req, res, next) {
 
 
 module.exports = router;
-
-// TODO add section - how I see myself next year

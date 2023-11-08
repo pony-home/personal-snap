@@ -13,17 +13,19 @@
         )
 
         .input-group
-        //- rephrase
         span#fun-2-sp.input-group-text.col-sm-8 How much times per year can you travel/see new city/place ? 
         input#fun-2.form-control(
           aria-describedby="fun-2" 
+          maxlength=46
+          name="fun2"
           type="text"
         )
         .input-group
-        //- rephrase
         span#fun-3-sp.input-group-text.col-sm-8 What new things/places/people have you explored within last year? 
         input#fun-3.form-control(
           aria-describedby="fun-3" 
+          maxlength=100
+          name="fun3"
           type="text"
         )
         .input-group
@@ -31,42 +33,61 @@
         span#fun-31-sp.input-group-text.col-sm-8 Amusements this year 
         input#fun-31.form-control(
           aria-describedby="fun-31" 
+          maxlength=100
+          name="fun31"
           type="text"
         )
 
         .input-group
-        //- rephrase
         span#fun-4-sp.input-group-text.col-sm-8 What would you like to see/try/visit within the next couple of years? 
         input#fun-4.form-control(
           aria-describedby="fun-4" 
+          maxlength=100
+          name="fun4"
           type="text"
         )
         .input-group
-        //- rephrase
         span#fun-5-sp.input-group-text.col-sm-8 How do you spend your free time? 
         input#fun-5.form-control(
           aria-describedby="fun-5" 
+          maxlength=100
+          name="fun5"
           type="text"
           placeholder=""
         )
 
         .input-group
-        //- rephrase
-        //- TODO: make combobox
-        span#fun-6-sp.input-group-text.col-sm-8 Is recreational part of youl life is included in routine? 
-        input#fun-6.form-control(
-          aria-describedby="fun-6" 
-          type="text"
-        )
+        span#fun-6-sp.input-group-text.col-sm-8 Is recreational part of youl life is included in routine?
+        select#fun-6.form-select(name="funincluded")
+          option(selected="" value="Yes") Yes
+          option(value="No") No
 
         .input-group
         span#fun-8-sp.input-group-text.col-sm-2 Note
-        input#fun-8.form-control(
+        textarea#fun-8.form-control(
           aria-describedby="fun-8" 
+          cols="33" 
+          rows="5" 
+          name="fun8"
+          maxlength=1100
           placeholder="TODO, Current state of things (how often do you have time to just have fun, with whom mostly, what do you enjoy, etc)"
-          type="text"
         )
 
+  
+.form-group.mb-3.col-sm-10
+    h3 Future you
 
-//- TODO add placeholders
-//- TODO rephrase all questions
+       .input-group
+        span#fun-9-sp.input-group-text.col-sm-2 Note
+        textarea#fun-9.form-control(
+          aria-describedby="fun-9" 
+          cols="33" 
+          rows="5" 
+          name="futureyou"
+          maxlength=400
+          placeholder="How do you see yourself in a year"
+        )    
+
+
+
+//- TODO check max length values
