@@ -27,11 +27,10 @@ router.post('/', function(req, res, next) {
   currentY = 40;
 
   // TODO text to upper case, change font, add background
-  // doc.fontSize(20).fillColor('black').text(req.body.name + "," + req.body.age + " years", 180, currentY);
-  doc.fontSize(18).fillOpacity(1).fillColor('white').text("KRISTINA, 31 YEARS", 210, currentY);
+  doc.fontSize(18).fillOpacity(1).fillColor('white').text(req.body.name + ", " + req.body.age + " YEARS", 210, currentY);
 
   currentY = 75;
-  // doc.roundedRect(40, currentY-5, 250, 170, 20).fillOpacity(0.3).fill("gray");
+  // TODO add image upload
   doc.fillOpacity(1).image("public/images/image.jpg", 110, currentY, {height: 160,  align: 'center', valign: 'center'});
 
 
@@ -67,8 +66,7 @@ router.post('/', function(req, res, next) {
   doc.fontSize(6).fillColor('black').opacity(0.5).text("Career", 480, currentY+158);
 
 
-  // let sectionRate = req.body.healthRate;
-  let sectionRate = 9;
+  let sectionRate = req.body.healthRate;
   let radius = sectionRadius * sectionRate;
   let xVal2 = x0 + (angledSectionRadius * sectionRate);
   let yVal1 = y0 - radius;
@@ -78,8 +76,7 @@ router.post('/', function(req, res, next) {
     .fill("green")
     .stroke();
 
-  // sectionRate = req.body.mentalRate;
-  sectionRate = 6;
+  sectionRate = req.body.mentalRate;
   let xVal1 = x0 + (sectionRadius * sectionRate);
   radius = sectionRadius * sectionRate;
   xVal2 = x0 + (angledSectionRadius * sectionRate);
@@ -89,8 +86,7 @@ router.post('/', function(req, res, next) {
     .fill("orange")
     .stroke();
 
-  // sectionRate = req.body.relationsRate;
-  sectionRate = 9;
+  sectionRate = req.body.relationsRate;
   radius = sectionRadius * sectionRate;
   xVal1 = x0 + (sectionRadius * sectionRate);
   xVal2 = x0 + (angledSectionRadius * sectionRate);
@@ -100,8 +96,7 @@ router.post('/', function(req, res, next) {
     .fill("red")
     .stroke();
 
-  // sectionRate = req.body.careerRate;
-  sectionRate = 7;
+  sectionRate = req.body.careerRate;
   radius = sectionRadius * sectionRate;
   yVal1 = y0 + radius;
   xVal2 = x0 + (angledSectionRadius * sectionRate);
@@ -111,8 +106,7 @@ router.post('/', function(req, res, next) {
     .fill("yellow")
     .stroke();
 
-  // sectionRate = req.body.fitnessRate;
-  sectionRate = 8;
+  sectionRate = req.body.fitnessRate;
   radius = sectionRadius * sectionRate;
   yVal1 = y0 - radius;
   xVal2 = x0 - (angledSectionRadius * sectionRate);
@@ -120,10 +114,9 @@ router.post('/', function(req, res, next) {
   doc.path("M " + x0 + "," + y0+ " V " + yVal1 + " A " + radius + " " + radius + " 0 0 0 " + xVal2 + " " + yVal2 + " Z")
     .fillOpacity(0.3)
     .fill("violet")
-    .stroke();2
+    .stroke();
 
-// sectionRate = req.body.financeRate;
-  sectionRate = 4;
+  sectionRate = req.body.financeRate;
   radius = sectionRadius * sectionRate;
   xVal1 = x0 - (sectionRadius * sectionRate);
   xVal2 = x0 - (angledSectionRadius * sectionRate);
@@ -133,8 +126,7 @@ router.post('/', function(req, res, next) {
     .fill("blue")
     .stroke();
 
-// sectionRate = req.body.hobbiesRate;
-  sectionRate = 9;
+  sectionRate = req.body.hobbiesRate;
   radius = sectionRadius * sectionRate;
   xVal1 = x0 - (sectionRadius * sectionRate);
   xVal2 = x0 - (angledSectionRadius * sectionRate);
@@ -144,8 +136,7 @@ router.post('/', function(req, res, next) {
     .fill("pink")
     .stroke();
 
-// sectionRate = req.body.funRate;
-  sectionRate = 10;
+  sectionRate = req.body.funRate;
   radius = sectionRadius * sectionRate;
   yVal1 = y0 + radius;
   xVal2 = x0 - (angledSectionRadius * sectionRate);
@@ -169,32 +160,31 @@ router.post('/', function(req, res, next) {
 
   currentY = 290;
   // AESTHETIC PART
-  if (req.body.genderRadio === 'Female') {
+  if (req.body.gender === '1') {
       doc.image("public/images/female.jpg", 85, currentY, {height: 215,  align: 'center', valign: 'center'});
         //body measurments
       doc.fontSize(7).fillOpacity(1);
-      doc.fillColor("gray").text("178 cm", 70, currentY+90);
-      doc.fillColor("gray").text("35 cm", 147, currentY+38);
-      doc.fillColor("gray").text("90 cm", 160, currentY+58);
-      doc.fillColor("gray").text("32 cm", 160, currentY+67);
-      doc.fillColor("gray").text("62 cm", 160, currentY+78);
-      doc.fillColor("gray").text("93 cm", 160, currentY+96);
-      doc.fillColor("gray").text("55 cm", 158, currentY+116);
-      doc.fillColor("gray").text("37 cm", 154, currentY+159);
+      doc.fillColor("gray").text(req.body.height + " cm", 70, currentY+90);
+      doc.fillColor("gray").text(req.body.neck + " cm", 147, currentY+38);
+      doc.fillColor("gray").text(req.body.chest + " cm", 160, currentY+58);
+      doc.fillColor("gray").text(req.body.arm + " cm", 160, currentY+67);
+      doc.fillColor("gray").text(req.body.waist + " cm", 160, currentY+78);
+      doc.fillColor("gray").text(req.body.hips + " cm", 160, currentY+96);
+      doc.fillColor("gray").text(req.body.thigh + " cm", 158, currentY+116);
+      doc.fillColor("gray").text(req.body.calf + " cm", 154, currentY+159);
   } else {  
       doc.image("public/images/male.jpg", 85, currentY, {height: 215,  align: 'center', valign: 'center'});
         //body measurments
       doc.fontSize(7).fillOpacity(1);
-      doc.fillColor("gray").text("178 cm", 70, currentY+90);
-      doc.fillColor("gray").text("35 cm", 147, currentY+28);
-      doc.fillColor("gray").text("90 cm", 170, currentY+57);
-      doc.fillColor("gray").text("32 cm", 172, currentY+64);
-      doc.fillColor("gray").text("62 cm", 173, currentY+83);
-      doc.fillColor("gray").text("93 cm", 173, currentY+101);
-      doc.fillColor("gray").text("55 cm", 158, currentY+125);
-      doc.fillColor("gray").text("37 cm", 160, currentY+161);
+      doc.fillColor("gray").text(req.body.height + " cm", 70, currentY+90);
+      doc.fillColor("gray").text(req.body.neck + " cm", 147, currentY+28);
+      doc.fillColor("gray").text(req.body.chest + " cm", 170, currentY+57);
+      doc.fillColor("gray").text(req.body.arm + " cm", 172, currentY+64);
+      doc.fillColor("gray").text(req.body.waist + " cm", 173, currentY+83);
+      doc.fillColor("gray").text(req.body.hips + " cm", 173, currentY+101);
+      doc.fillColor("gray").text(req.body.thigh + " cm", 158, currentY+125);
+      doc.fillColor("gray").text(req.body.calf + " cm", 160, currentY+161);
   }
-  // 148 pelm, 600 gr miesa, 0,6 ciasta
 
   //body metrics
   currentY = 513;
@@ -225,18 +215,16 @@ router.post('/', function(req, res, next) {
   doc.rect(gradX1, currentY+33, scoreWidth, 5).fill(aesteticGrad);
   //values
   doc.fontSize(6).fillOpacity(1);
-  doc.fillColor("gray").text("60 kg", gradX1 + 3, currentY+3);
+  doc.fillColor("gray").text(req.body.weight + " kg", gradX1 + 3, currentY+3);
   let valueStep = scoreWidth /10;
   let valueSignWidth = 1;
   let valueSightHeight = 9;
   // TODO: add calculation and appropriate scale
   let bmiScore = 8;
   doc.rect(gradX1 + valueStep*bmiScore, currentY + 11, valueSignWidth, valueSightHeight).fill('gray');
-  // let mobilityScore = body.req.mobilityRate1;
-  let faceSkinScore = 9;
+  let faceSkinScore = req.body.faceskin;
   doc.rect(gradX1 + valueStep*faceSkinScore, currentY + 21, valueSignWidth, valueSightHeight).fill('gray');
-  // // let mobilityScore = body.req.mobilityRate2;
-  let bodySkinScore = 9;
+  let bodySkinScore = req.body.bodyskin;
   doc.rect(gradX1 + valueStep*bodySkinScore, currentY + 31, valueSignWidth, valueSightHeight).fill('gray');
 
   valueStep = 8.5;
@@ -271,13 +259,12 @@ router.post('/', function(req, res, next) {
   doc.fillColor("white").text("VO2max", 230, currentY+53);
   doc.fillColor("white").text("Resting heart rate", 230,currentY+63);
 
-  // TODO: add values from input form
-  doc.fillColor("gray").text("120/80 mmHg", 300, currentY+13);
-  doc.text("4 mmol/L", 300, currentY+23);
-  doc.text("4 mmol/L", 300, currentY+33);
-  doc.text("26% (DEXA scan)", 300, currentY+43);
-  doc.text("50 ml/kg/min", 300, currentY+53);
-  doc.text("40 bpm", 300, currentY+63);
+  doc.fillColor("gray").text(req.body.bloodpressure + " mmHg", 300, currentY+13);
+  doc.text(req.body.cholesterol + " mmol/L", 300, currentY+23);
+  doc.text(req.body.glucose + " mmol/L", 300, currentY+33);
+  doc.text(req.body.bodyfat + "% (" + req.body.bodyfatmeasure + ")", 300, currentY+43);
+  doc.text(req.body.vo2max + " ml/kg/min", 300, currentY+53);
+  doc.text(req.body.restinghr + " bpm", 300, currentY+63);
 
 
   // MISC PART
@@ -299,7 +286,6 @@ router.post('/', function(req, res, next) {
   doc.fontSize(6).fillColor("white").fillOpacity(1).text("Average amount of sleep", 409, currentY+33);
   doc.fontSize(6).fillColor("white").fillOpacity(1).text("Training volume per week", 409, currentY+43);
   doc.fontSize(6).fillColor("white").fillOpacity(1).text("Training volume per week", 409, currentY+53);
-  // TODO: rename
   doc.fontSize(6).fillColor("white").fillOpacity(1).text("Healthy food percentage", 409, currentY+63);
   doc.fontSize(6).fillColor("white").fillOpacity(1).text("Sport disciplines", 409, currentY+73);
   doc.fontSize(6).fillColor("white").fillOpacity(1).text("Training routine", 409, currentY+83);
@@ -320,21 +306,17 @@ router.post('/', function(req, res, next) {
 
   //value text or value
   doc.fontSize(6).fillOpacity(1);
-  let moodScore = 7;
-  // let moodScore = body.req.??;
+  let moodScore = req.body.mood;
   doc.fillOpacity(1).rect(gradX1 + valueStep*moodScore, currentY + 11, valueSignWidth, valueSightHeight).fill('gray');
-  let sleepScore = 8;
-  // let sleepScore = body.req.??;
+  let sleepScore = req.body.sleep0;
   doc.rect(gradX1 + valueStep*sleepScore, currentY + 21, valueSignWidth, valueSightHeight).fill('gray');
 
-  doc.fillColor("gray").text("7 hours", gradX1+2, currentY+33);
-  doc.fillColor("gray").text("6 hours", gradX1+2, currentY+43);
-  doc.fillColor("gray").text("7 trainigs", gradX1+2, currentY+53);
-  doc.fillColor("gray").text("85 %", gradX1+2, currentY+63);
-  doc.fillColor("gray").text("Strength, run, bike, bike, bike, bike", gradX1+2, currentY+73, {width: 95});
-    // TODO: define max length in input form
-  doc.fillColor("gray").text(lorem.substring(0, 150), gradX1+2, currentY+83, {align: 'justify', width: 90});
-
+  doc.fillColor("gray").text(req.body.sleep1 + " hours", gradX1+2, currentY+33);
+  doc.fillColor("gray").text(req.body.training0 + " hours", gradX1+2, currentY+43);
+  doc.fillColor("gray").text(req.body.training1 + " trainigs", gradX1+2, currentY+53);
+  doc.fillColor("gray").text(req.body.training4 + " %", gradX1+2, currentY+63);
+  doc.fillColor("gray").text(req.body.training2, gradX1+2, currentY+73, {width: 95});
+  doc.fillColor("gray").text(req.body.training3, gradX1+2, currentY+83, {align: 'justify', width: 90});
 
 
   currentY = 360;
@@ -353,16 +335,12 @@ router.post('/', function(req, res, next) {
   doc.rect(315, currentY+43, fitnessValueRectWidth, 10).fillAndStroke("gray", "white");
 
   doc.fontSize(6).fillColor("white").fillOpacity(1).text("Max pull-ups", 230, currentY+26);
-  // TODO: retrieve select value
-  // doc.fillColor("white").text("Max " + body.req.pushupType + " amount", 230, currentY+35);
-  doc.fillColor("white").text("Max regular push-ups amount", 230, currentY+36);
+  doc.fillColor("white").text("Max " + req.body.pushuptype + " amount", 230, currentY+36);
   doc.fillColor("white").text("Max squats", 230, currentY+46);
 
-  doc.fontSize(6).fillColor("gray").fillOpacity(1).text("2", 320, currentY+26);
-  doc.text("15", 320, currentY+36);
-  // TODO: retrieve squats characteristics
-  // doc.text("34 " + req.body.squatsType, 300, currentY+47);
-  doc.text("34 kg" , 320, currentY+46);
+  doc.fontSize(6).fillColor("gray").fillOpacity(1).text(req.body.pullup, 320, currentY+26);
+  doc.text(req.body.pushup, 320, currentY+36);
+  doc.text(req.body.squats + req.body.squatstype, 320, currentY+46);
 
 
   currentY = 415;
@@ -385,25 +363,23 @@ router.post('/', function(req, res, next) {
   doc.rect(315, currentY+68, fitnessValueRectWidth, 10).fillAndStroke("gray", "white");
   doc.rect(315, currentY+78, fitnessValueRectWidth, 10).fillAndStroke("gray", "white");
 
-  // TODO: retrieve select value for all fields
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Fastest 1km run", 230, currentY+11);
-  // doc.fillColor("white").text("Max " + body.req.pushupType + " amount", 230, currentY+35);
-  doc.fillColor("white").text("Fastest 5km run", 230, currentY+21);
-  doc.fillColor("white").text("Fastest 5km bike ride", 230, currentY+31);
-  doc.fillColor("white").text("Longest distance (run)", 230, currentY+41);
-  doc.fillColor("white").text("Longest distance (bike)", 230, currentY+51);
-  doc.fillColor("white").text("Yearly mileage (run)", 230, currentY+61);
-  doc.fillColor("white").text("Yearly mileage (bike)", 230, currentY+71);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Fastest "+ req.body.prdist1 + req.body.prtype1, 230, currentY+11);
+  doc.fillColor("white").text("Fastest "+ req.body.prdist2 + req.body.prtype2, 230, currentY+21);
+  doc.fillColor("white").text("Fastest "+ req.body.prdist3 + req.body.prtype3, 230, currentY+31);
+  doc.fillColor("white").text("Longest distance (" + req.body.longesttype1 +")", 230, currentY+41);
+  doc.fillColor("white").text("Longest distance (" + req.body.longesttype2 +")", 230, currentY+51);
+  doc.fillColor("white").text("Yearly mileage (" + req.body.yearlytype1 +")", 230, currentY+61);
+  doc.fillColor("white").text("Yearly mileage (" + req.body.yearlytype2 +")", 230, currentY+71);
   doc.fillColor("white").text("Average steps per day (yearly)", 230, currentY+81);
 
-  doc.fontSize(6).fillColor("gray").fillOpacity(1).text("5:00 min", 320, currentY+11);
-  doc.text("23:00 mins", 320, currentY+21);
-  doc.text("15:00 min" , 320, currentY+31);
-  doc.text("15 km", 320, currentY+41);
-  doc.text("85 km" , 320, currentY+51);
-  doc.text("395 km" , 320, currentY+61);
-  doc.text("655 km", 320, currentY+71);
-  doc.text("8700 steps" , 320, currentY+81);
+  doc.fontSize(6).fillColor("gray").fillOpacity(1).text(req.body.cardio0, 320, currentY+11);
+  doc.text(req.body.cardio1, 320, currentY+21);
+  doc.text(req.body.cardio2 , 320, currentY+31);
+  doc.text(req.body.cardio3 + " km", 320, currentY+41);
+  doc.text(req.body.cardio4 + " km" , 320, currentY+51);
+  doc.text(req.body.cardio5 + " km" , 320, currentY+61);
+  doc.text(req.body.cardio6 + " km", 320, currentY+71);
+  doc.text(req.body.cardio7 + " steps" , 320, currentY+81);
 
   currentY = 505;
   let mobilityScoreWidth = 85;
@@ -424,30 +400,24 @@ router.post('/', function(req, res, next) {
   doc.rect(gradX1, currentY+30, mobilityScoreWidth, 5).fill(grad2);
   doc.rect(gradX1, currentY+40, mobilityScoreWidth, 5).fill(grad2);
 
-    // TODO: retrieve select value for all fields
   doc.fontSize(6).fillColor("white").fillOpacity(1).text("Shoulders mobility", 230, currentY+11);
   doc.fillColor("white").text("Thoracic spine mobility", 230, currentY+21);
   doc.fillColor("white").text("Hips mobility", 230, currentY+31);
   doc.fillColor("white").text("Ankles mobility", 230, currentY+41);
 
-  // TODO: mobility values
-  let mobilityScore = 8;
-  // let mobilityScore = body.req.mobilityRate0;
+  let mobilityScore = body.req.mobilityRate0;
   doc.rect(gradX1 + valueStep*mobilityScore, currentY + 8, valueSignWidth, valueSightHeight).fill('gray');
-  // let mobilityScore = body.req.mobilityRate1;
-  mobilityScore = 6;
+  mobilityScore = body.req.mobilityRate1;
   doc.rect(gradX1 + valueStep*mobilityScore, currentY + 18, valueSignWidth, valueSightHeight).fill('gray');
-  // let mobilityScore = body.req.mobilityRate2;
-  mobilityScore = 9;
+  mobilityScore = body.req.mobilityRate2;
   doc.rect(gradX1 + valueStep*mobilityScore, currentY + 28, valueSignWidth, valueSightHeight).fill('gray');
-  // let mobilityScore = body.req.mobilityRate3;
-  mobilityScore = 5;
+  mobilityScore = body.req.mobilityRate3;
   doc.rect(gradX1 + valueStep*mobilityScore, currentY + 38, valueSignWidth, valueSightHeight).fill('gray');
 
   // SUMMARY PART
   currentY = 415;
   doc.fontSize(9).fillColor("gray").text("Summary", 405, currentY);
-  doc.fontSize(6).fillColor("gray").text(lorem+lorem.substring(0,200), 405, currentY+10, {align: 'justify', width: 160});
+  doc.fontSize(6).fillColor("gray").text(req.body.healthnote, 405, currentY+10, {align: 'justify', width: 160});
 // HEALTH SECTION - END
 
 

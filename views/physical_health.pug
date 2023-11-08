@@ -5,6 +5,7 @@
           aria-describedby="name" 
           type="text"
           name="name"
+          required
         )
 
         .input-group
@@ -15,22 +16,13 @@
           type="number"
           min="0"
           max="100"
+          required
         )
         .input-group
         span#gender-sp.input-group-text.col-sm-5 Gender
-        input#femaleRadio.form-check-input(
-          value="Female" 
-          name="genderRadio" 
-          type="radio"
-        )
-        label.form-check-label(for="femaleRadio") Female
-        //- TODO: styling, checked default option
-        input#maleRadio.form-check-input(
-          value="Male" 
-          name="genderRadio" 
-          type="radio"
-        )
-        label.form-check-label(for="maleRadio") Male
+        select#body-fat-measure.form-select(name="gender")
+          option(selected="" value="1") Female
+          option(value="2") Male
 
 .form-group.mb-3.col-sm-10
       h3 Health
@@ -84,10 +76,10 @@
           max=50
           step=0.1
         )
-        select#body-fat-measure.form-select
-          option(value="1") Calipper
-          option(selected="" value="2") DEXA scan
-          option(value="3") Home weight
+        select#body-fat-measure.form-select(name="bodyfatmeasure")
+          option(value="Calipper") Calipper
+          option(selected="" value="DEXA scan") DEXA scan
+          option(value="Home weight") Home weight
           
         .input-group
         span#vo2max-sp.input-group-text.col-sm-5 VO2max, ml/kg/min
@@ -254,9 +246,9 @@
           max="100"
           name="pushup"
         )
-        select#push-up-form.form-select
-          option(selected="" value="1") Knee push-up
-          option(value="2") Regular push-ups
+        select#push-up-form.form-select(name="pushuptype")
+          option(selected="" value="Knee push-ups") Knee push-up
+          option(value="Regular push-ups") Regular push-ups
 
         .input-group
         span#squats-sp.input-group-text.col-sm-5 Squats (kg or amount)
@@ -267,21 +259,21 @@
           max="200"
           name="squats"
         )
-        select#squats-select.form-select
-          option(selected="" value="1") kg (1 time to failure)
-          option(value="2") times with body weight 
+        select#squats-select.form-select(name="squatstype")
+          option(selected="" value="kg") kg (1 time to failure)
+          option(value="times with body weight") times with body weight 
 
     h6 Cardiovascular 
 
        .input-group
         span#cardio-0-sp.input-group-text.col-sm-5 Personal record, mins
-        select#cardio-0-select.form-select
-          option(selected="" value="1") Run
-          option(value="2") Bike
-        select#cardio-dist-0-select.form-select
-          option(selected="" value="1") 1 km
-          option(value="2") 5 km
-          option(value="3") 10 km
+        select#cardio-0-select.form-select(name="prtype1")
+          option(selected="" value="Run") Run
+          option(value="Bike") Bike
+        select#cardio-dist-0-select.form-select(name="prdist1")
+          option(selected="" value="1 km") 1 km
+          option(value="5 km") 5 km
+          option(value="10 km") 10 km
         input#cardio-0.form-control(
           aria-describedby="cardio-0" 
           type="text"
@@ -290,13 +282,13 @@
 
         .input-group
         span#cardio-1-sp.input-group-text.col-sm-5 Personal record, mins
-        select#cardio-1-select.form-select
-          option(selected="" value="1") Run
-          option(value="2") Bike
-        select#cardio-dist-1-select.form-select
-          option(selected="" value="1") 1 km
-          option(value="2") 5 km
-          option(value="3") 10 km
+        select#cardio-1-select.form-select(name="prtype2")
+          option(selected="" value="Run") Run
+          option(value="Bike") Bike
+        select#cardio-dist-1-select.form-select(name="prdist2")
+          option(selected="" value="1 km") 1 km
+          option(value="5 km") 5 km
+          option(value="10 km") 10 km
         input#cardio-1.form-control(
           aria-describedby="cardio-1" 
           type="text"
@@ -305,13 +297,13 @@
 
         .input-group
         span#cardio-2-sp.input-group-text.col-sm-5 Personal record, mins
-        select#cardio-2-select.form-select
-          option(selected="" value="1") Run
-          option(value="2") Bike
-        select#cardio-dist-2-select.form-select
-          option(selected="" value="1") 1 km
-          option(value="2") 5 km
-          option(value="3") 10 km
+        select#cardio-2-select.form-select(name="prtype3")
+          option(selected="" value="Run") Run
+          option(value="Bike") Bike
+        select#cardio-dist-2-select.form-select(name="prdist3")
+          option(selected="" value="1 km") 1 km
+          option(value="5 km") 5 km
+          option(value="10 km") 10 km
         input#cardio-2.form-control(
           aria-describedby="cardio-2" 
           type="text"
@@ -321,9 +313,9 @@
 
         .input-group
         span#cardio-3-sp.input-group-text.col-sm-5 Longest distance, km
-        select#cardio-3-select.form-select
-          option(selected="" value="1") Run
-          option(value="2") Bike
+        select#cardio-3-select.form-select(name="longesttype1")
+          option(selected="" value="Run") Run
+          option(value="Bike") Bike
         input#cardio-3.form-control(
           aria-describedby="cardio-3" 
           type="number"
@@ -334,9 +326,9 @@
 
         .input-group
         span#cardio-4-sp.input-group-text.col-sm-5 Longest distance, km
-        select#cardio-4-select.form-select
-          option(selected="" value="1") Run
-          option(value="2") Bike
+        select#cardio-4-select.form-select(name="longesttype2")
+          option(selected="" value="Run") Run
+          option(value="Bike") Bike
         input#cardio-4.form-control(
           aria-describedby="cardio-4" 
           type="number"
@@ -348,9 +340,9 @@
 
         .input-group
         span#cardio-5-sp.input-group-text.col-sm-5 Yearly mileage, km
-        select#cardio-5-select.form-select
-          option(selected="" value="1") Run
-          option(value="2") Bike
+        select#cardio-5-select.form-select(name="yearlytype1")
+          option(selected="" value="Run") Run
+          option(value="Bike") Bike
         input#cardio-5.form-control(
           aria-describedby="cardio-5" 
           type="number"
@@ -360,9 +352,9 @@
 
         .input-group
         span#cardio-6-sp.input-group-text.col-sm-5 Yearly mileage, km
-        select#cardio-6-select.form-select
-          option(selected="" value="1") Run
-          option(value="2") Bike
+        select#cardio-6-select.form-select(name="yearlytype2")
+          option(selected="" value="Run") Run
+          option(value="Bike") Bike
         input#cardio-6.form-control(
           aria-describedby="cardio-6" 
           type="number"
@@ -456,7 +448,7 @@
           aria-describedby="sleep-duration" 
           type="number"
           min="0"
-          max="10"
+          max="15"
           name="sleep1"
           placeholder="Average sleep duration"
         )
