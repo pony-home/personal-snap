@@ -437,8 +437,8 @@
         input#sleep.form-control(
           aria-describedby="sleep" 
           type="number"
-          min="0"
-          max="10"
+          min=0
+          max=100
           name="sleep0"
           placeholder="1 - short/missing REM/dep sleep phase, interrupted, short in duration, 10 - excellent REM/deep, excelent recovery"
         )
@@ -446,9 +446,7 @@
         span#sleep-duration-sp.input-group-text.col-sm-5 Average amount of sleep per night, hours
         input#sleep-duration.form-control(
           aria-describedby="sleep-duration" 
-          type="number"
-          min="0"
-          max="15"
+          type="text"
           name="sleep1"
           placeholder="Average sleep duration"
         )

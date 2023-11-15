@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 
-  let fileName = 'Annual snapshot'
+  let fileName = 'Annual snapshot-' + new Date().getFullYear()
   res.setHeader('Content-disposition', 'inline; filename='+ fileName +'.pdf');
 
   const doc = new PDFDocument();
@@ -206,9 +206,8 @@ router.post('/', function(req, res, next) {
   aesteticGrad.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
 
   doc.fillOpacity(0.2).rect(gradX1, currentY, scoreWidth, tableHeight).fillAndStroke("gray", "white");
-  // TODO: BMI scale
-  doc.fillOpacity(0.3).rect(gradX1, currentY+13, scoreWidth, 5).fill(aesteticGrad);
-  doc.rect(gradX1, currentY+23, scoreWidth, 5).fill(aesteticGrad);
+  doc.fillOpacity(0.2).rect(gradX1, currentY+10, scoreWidth, tableHeight).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.3).rect(gradX1, currentY+23, scoreWidth, 5).fill(aesteticGrad);
   doc.rect(gradX1, currentY+33, scoreWidth, 5).fill(aesteticGrad);
   //values
   doc.fontSize(6).fillOpacity(1);
@@ -216,11 +215,16 @@ router.post('/', function(req, res, next) {
   let valueStep = scoreWidth /10;
   let valueSignWidth = 1;
   let valueSightHeight = 9;
-  // TODO: add calculation and appropriate scale
-  let bmiScore = 8;
-  doc.rect(gradX1 + valueStep*bmiScore, currentY + 11, valueSignWidth, valueSightHeight).fill('gray');
+
+  let heightInMeters = req.body.height/100;
+  let weight = req.body.weight;
+  let bmiScore = weight/(heightInMeters*heightInMeters);
+  let bmiColor = ((bmiScore > 18.5 && bmiScore < 25) ? 'green' : 'red');
+  
+  doc.fillColor("gray").text(bmiScore.toFixed(1), gradX1 + 3, currentY+13);
+  doc.fillOpacity(0.4).circle(gradX1 + 20, currentY + 15, 2).fill(bmiColor);
   let faceSkinScore = req.body.faceskin;
-  doc.rect(gradX1 + valueStep*faceSkinScore, currentY + 21, valueSignWidth, valueSightHeight).fill('gray');
+  doc.fillOpacity(1).rect(gradX1 + valueStep*faceSkinScore, currentY + 21, valueSignWidth, valueSightHeight).fill('gray');
   let bodySkinScore = req.body.bodyskin;
   doc.rect(gradX1 + valueStep*bodySkinScore, currentY + 31, valueSignWidth, valueSightHeight).fill('gray');
 
@@ -310,7 +314,7 @@ router.post('/', function(req, res, next) {
 
   doc.fillColor("gray").text(req.body.sleep1 + " hours", gradX1+2, currentY+33);
   doc.fillColor("gray").text(req.body.training0 + " hours", gradX1+2, currentY+43);
-  doc.fillColor("gray").text(req.body.training1 + " trainigs", gradX1+2, currentY+53);
+  doc.fillColor("gray").text(req.body.training1, gradX1+2, currentY+53, {width: 96});
   doc.fillColor("gray").text(req.body.training4 + " %", gradX1+2, currentY+63);
   doc.fillColor("gray").text(req.body.training2, gradX1+2, currentY+73, {width: 95});
   doc.fillColor("gray").text(req.body.training3, gradX1+2, currentY+83, {align: 'justify', width: 90});
@@ -414,7 +418,7 @@ router.post('/', function(req, res, next) {
   // SUMMARY PART
   currentY = 415;
   doc.fontSize(9).fillColor("gray").text("Summary", 405, currentY);
-  doc.fontSize(6).fillColor("gray").text(req.body.healthnote, 405, currentY+10, {align: 'justify', width: 160});
+  doc.font("public/fonts/Arial.ttf").fontSize(6).fillColor("gray").text(req.body.healthnote, 405, currentY+10, {align: 'justify', width: 160});
 // HEALTH SECTION - END
 
 
@@ -451,8 +455,8 @@ router.post('/', function(req, res, next) {
   doc.fontSize(6).fillColor("white").fillOpacity(1).text("Social interactions", titleStartX, currentY+53);
   doc.fontSize(6).fillColor("white").fillOpacity(1).text("Confidence", titleStartX, currentY+63);
   doc.fontSize(6).fillColor("white").fillOpacity(1).text("Willpower and tenacity", titleStartX, currentY+73);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Anxiety", titleStartX, currentY+83);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Explosiveness", titleStartX, currentY+93);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Emotion controlling skills", titleStartX, currentY+83);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Anxiety", titleStartX, currentY+93);
 
   //value background
   gradX1 = 135;
@@ -468,13 +472,14 @@ router.post('/', function(req, res, next) {
   doc.fillOpacity(0.3).rect(gradX1, currentY+53, gradWidth, 5).fill(grad3);
   doc.fillOpacity(0.3).rect(gradX1, currentY+63, gradWidth, 5).fill(grad3);
   doc.fillOpacity(0.3).rect(gradX1, currentY+73, gradWidth, 5).fill(grad3);
+  doc.fillOpacity(0.3).rect(gradX1, currentY+83, gradWidth, 5).fill(grad3);
   let grad4 = doc.linearGradient(gradX1, currentY, gradX2, currentY);
   grad4.stop(0, 'green').stop(0.5, 'yellow').stop(1, 'red');
-  doc.fillOpacity(0.3).rect(gradX1, currentY+83, gradWidth, 5).fill(grad4);
   doc.fillOpacity(0.3).rect(gradX1, currentY+93, gradWidth, 5).fill(grad4);
 
   //value text or value
   doc.fontSize(6).fillOpacity(1);
+  valueStep = gradWidth / 10;
   let resilienceScore = req.body.resilienceScore;
   doc.rect(gradX1 + valueStep*resilienceScore, currentY + 11, valueSignWidth, valueSightHeight).fill('gray');
   let positivityScore = req.body.positivityScore;
@@ -489,10 +494,10 @@ router.post('/', function(req, res, next) {
   doc.rect(gradX1 + valueStep*confidenceScore, currentY + 61, valueSignWidth, valueSightHeight).fill('gray');
   let willpowerScore = req.body.willpowerScore;
   doc.rect(gradX1 + valueStep*willpowerScore, currentY + 71, valueSignWidth, valueSightHeight).fill('gray');
-  let anxietyScore = req.body.anxietyScore;
-  doc.rect(gradX1 + valueStep*anxietyScore, currentY + 81, valueSignWidth, valueSightHeight).fill('gray');
   let explosivnessScore = req.body.explosivnessScore;
-  doc.rect(gradX1 + valueStep*explosivnessScore, currentY + 91, valueSignWidth, valueSightHeight).fill('gray');
+  doc.rect(gradX1 + valueStep*explosivnessScore, currentY + 81, valueSignWidth, valueSightHeight).fill('gray');
+  let anxietyScore = req.body.anxietyScore;
+  doc.rect(gradX1 + valueStep*anxietyScore, currentY + 91, valueSignWidth, valueSightHeight).fill('gray');
 
   let textColumnX = 260;
   doc.fontSize(7).fillColor("gray").text(req.body.mental11, textColumnX, currentY+10, {align: 'justify', width: 310});
@@ -500,30 +505,32 @@ router.post('/', function(req, res, next) {
 
 /////////////////////////////////////////////////////////////////////
   doc.addPage();
-  currentY = 10;
+  currentY = 5;
+  titleBoxHeight = 25;
   // RELATIONSHIPS SECTION START
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight)
     .fillOpacity(0.4)
     .fill("gray");
 
-  doc.fontSize(12).fillOpacity(1).fillColor('white').text("RELATIONSHIPS", 240, currentY + 10);
+  doc.fontSize(12).fillOpacity(1).fillColor('white').text("RELATIONSHIPS", 240, currentY + 5);
 
   let column1X = 55;
   let column2X = 227;
   let column3X = 400;
-  currentY = 45;
+  currentY = 35;
 
   //romantic
   doc.fontSize(9).fillColor("gray").text("Romantic", column1X, currentY);
   doc.rect(column1X, currentY+10, markersRectWidth, 10).fillAndStroke("gray", "white");
   doc.rect(column1X, currentY+20, markersRectWidth, 10).fillAndStroke("gray", "white");
   doc.rect(column1X, currentY+30, markersRectWidth, 10).fillAndStroke("gray", "white");
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Satisfaction", column1X +3, currentY+13);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together (amount)", column1X +3, currentY+23);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together (quality)", column1X +3, currentY+33);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Satisfaction", column1X +3, currentY+12);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together (amount)", column1X +3, currentY+22);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together (quality)", column1X +3, currentY+32);
 
   gradX1 = 130;
   gradX2 = 220;
+  valueStep = markersValueRectWidth/10;
   let grad5 = doc.linearGradient(gradX1, currentY, gradX2, currentY);
   grad5.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
 
@@ -545,9 +552,9 @@ router.post('/', function(req, res, next) {
   doc.rect(column2X, currentY+10, markersRectWidth, 10).fillAndStroke("gray", "white");
   doc.rect(column2X, currentY+20, markersRectWidth, 10).fillAndStroke("gray", "white");
   doc.rect(column2X, currentY+30, markersRectWidth, 10).fillAndStroke("gray", "white");
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Atmosphere", column2X +3, currentY+13);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together (amount)", column2X +3, currentY+23);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together (quality)", column2X +3, currentY+33);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Atmosphere", column2X +3, currentY+12);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together (amount)", column2X +3, currentY+22);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together (quality)", column2X +3, currentY+32);
 
   gradX1 = 302;
   gradX2 = 392;
@@ -571,9 +578,9 @@ router.post('/', function(req, res, next) {
   doc.rect(column3X, currentY+10, markersRectWidth, 10).fillAndStroke("gray", "white");
   doc.rect(column3X, currentY+20, markersRectWidth, 10).fillAndStroke("gray", "white");
   doc.rect(column3X, currentY+30, markersRectWidth, 10).fillAndStroke("gray", "white");
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Friendship satisfaction", column3X +3, currentY+13);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together (amount)", column3X +3, currentY+23);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together (quality)", column3X +3, currentY+33);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Friendship satisfaction", column3X +3, currentY+12);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together (amount)", column3X +3, currentY+22);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time together (quality)", column3X +3, currentY+32);
 
   gradX1 = 475;
   gradX2 = 565;
@@ -595,12 +602,12 @@ router.post('/', function(req, res, next) {
 
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
-  currentY = 145;
+  currentY = 142;
   // BUSINESS AND CAREER SECTION START
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight).fillOpacity(0.4).fill("gray");
-  doc.fontSize(12).fillOpacity(1).fillColor('white').text("BUSINESS AND CAREER", 220, currentY + 10);
+  doc.fontSize(12).fillOpacity(1).fillColor('white').text("BUSINESS AND CAREER", 220, currentY + 5);
 
-  currentY = 170;
+  currentY = 167;
   //metrics
   //gray boxed
   grayBoxWidth = 100;
@@ -614,21 +621,22 @@ router.post('/', function(req, res, next) {
   doc.rect(x0, currentY+80, grayBoxWidth, 10).fillAndStroke("gray", "white");
 
   //titles on gray background
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Money earned by", titleStartX, currentY+13);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Career path", titleStartX, currentY+23);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Role in the team", titleStartX, currentY+33);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Amount of time for job (weekly)", titleStartX, currentY+43);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Money earned by", titleStartX, currentY+12);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Career path", titleStartX, currentY+22);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Role in the team", titleStartX, currentY+32);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Amount of time for job (weekly)", titleStartX, currentY+42);
 
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Amount of time spent (satisfaction)", titleStartX, currentY+53);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Job/career satisfaction", titleStartX, currentY+63);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Salary satisfaction", titleStartX, currentY+73);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Fit to life mission", titleStartX, currentY+83);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Amount of time spent (satisfaction)", titleStartX, currentY+52);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Job/career satisfaction", titleStartX, currentY+62);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Salary satisfaction", titleStartX, currentY+72);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Fit to life mission", titleStartX, currentY+82);
 
   //value background
   gradX1 = 150;
   gradX2 = 235;
   let valueRectWidth = 90;
   gradWidth = 90;
+  valueStep = (gradWidth - 2) /10;
   doc.fillOpacity(0.2).rect(gradX1, currentY+10, valueRectWidth, 10).fillAndStroke("gray", "white");
   doc.fillOpacity(0.2).rect(gradX1, currentY+20, valueRectWidth, 10).fillAndStroke("gray", "white");
   doc.fillOpacity(0.2).rect(gradX1, currentY+30, valueRectWidth, 10).fillAndStroke("gray", "white");
@@ -658,14 +666,14 @@ router.post('/', function(req, res, next) {
   let missionSatisfaction = req.body.career5;
   doc.rect(gradX1 + valueStep*missionSatisfaction, currentY + 81, valueSignWidth, valueSightHeight).fill('gray');
 
-  doc.fontSize(7).fillColor("gray").text(req.body.career8, textColumnX, currentY+10, {align: 'justify', width: 310});
+  doc.fontSize(7).fillColor("gray").text(req.body.career8, textColumnX, currentY+5, {align: 'justify', width: 310});
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
 
   currentY = 270;
   // FINANCE SECTION START
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight).fillOpacity(0.4).fill("gray");
-  doc.fontSize(12).fillOpacity(1).fillColor('white').text("FINANCE", 260, currentY + 10);
+  doc.fontSize(12).fillOpacity(1).fillColor('white').text("FINANCE", 260, currentY + 5);
   // TODO: add micro font with description of Basic needs/other needs
   // TODO: add method for color in value fields (if less/more than 40 - then green/red)
   currentY = 300;
@@ -681,14 +689,14 @@ router.post('/', function(req, res, next) {
   doc.rect(x0, currentY+70, grayBoxWidth, 10).fillAndStroke("gray", "white");
 
   //titles on gray background
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Monthly income", titleStartX, currentY+13);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Monthly spendings", titleStartX, currentY+23);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Income satisfaction", titleStartX, currentY+33);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Debts to income ratio", titleStartX, currentY+43);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Monthly income", titleStartX, currentY+12);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Monthly spendings", titleStartX, currentY+22);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Income satisfaction", titleStartX, currentY+32);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Debts to income ratio", titleStartX, currentY+42);
 
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Percent of passive income", titleStartX, currentY+53);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Basic needs coverage", titleStartX, currentY+63);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Secondary needs and lusts", titleStartX, currentY+73);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Percent of passive income", titleStartX, currentY+52);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Basic needs coverage", titleStartX, currentY+62);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Secondary needs and lusts", titleStartX, currentY+72);
 
   //value background
   valueRectWidth = 90;
@@ -711,6 +719,7 @@ router.post('/', function(req, res, next) {
   doc.fillColor("gray").text(req.body.finance2, gradX1+2, currentY+13);
   doc.fillColor("gray").text(req.body.finance3, gradX1+2, currentY+23);
 
+  valueStep = gradWidth /10;
   let incomeSatisfaction = req.body.finance1;
   doc.rect(gradX1 + valueStep*incomeSatisfaction, currentY + 31, valueSignWidth, valueSightHeight).fill('gray');
 
@@ -726,92 +735,91 @@ router.post('/', function(req, res, next) {
   doc.fillOpacity(0.3).rect(gradX1, currentY + 71, valueStep * secondaryNeeds, valueSightHeight).fill('orange');
 
   doc.fillOpacity(1).fontSize(7).fillColor("gray")
-  .text(req.body.finance8, textColumnX, currentY+10, {align: 'justify', width: 310});
+  .text(req.body.finance8, textColumnX, currentY+2, {align: 'justify', width: 310});
 
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
   currentY = 395;
   // HOBBIES SECTION START
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight).fillOpacity(0.4).fill("gray");
-  doc.fontSize(12).fillOpacity(1).fillColor('white').text("HOBBIES AND PERSONAL GROWTH", 190, currentY + 10);
+  doc.fontSize(12).fillOpacity(1).fillColor('white').text("HOBBIES AND PERSONAL GROWTH", 190, currentY + 5);
 
-  currentY = 425;
+  currentY = 415;
   //metrics
   //gray boxed
   grayBoxWidth = 100;
   doc.rect(x0, currentY+10, grayBoxWidth, 10).fillAndStroke("gray", "white");
-  doc.rect(x0, currentY+20, grayBoxWidth, 10).fillAndStroke("gray", "white");
-  doc.rect(x0, currentY+30, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+20, grayBoxWidth, 20).fillAndStroke("gray", "white");
   doc.rect(x0, currentY+40, grayBoxWidth, 10).fillAndStroke("gray", "white");
-  doc.rect(x0, currentY+50, grayBoxWidth, 10).fillAndStroke("gray", "white");
-  doc.rect(x0, currentY+60, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+50, grayBoxWidth, 20).fillAndStroke("gray", "white");
   doc.rect(x0, currentY+70, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+80, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+90, grayBoxWidth, 10).fillAndStroke("gray", "white");
 
   //titles on gray background
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Current goals", titleStartX, currentY+13);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Topics of interest/hobbies", titleStartX, currentY+23);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Sports", titleStartX, currentY+33);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Major achievments", titleStartX, currentY+43);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Current goals", titleStartX, currentY+12);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Topics of interest/hobbies", titleStartX, currentY+22);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Sports", titleStartX, currentY+42);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Major achievments", titleStartX, currentY+52);
 
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Major failures", titleStartX, currentY+53);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time for hobbies, per week", titleStartX, currentY+63);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time for hobbies (satisfaction)", titleStartX, currentY+73);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Major failures", titleStartX, currentY+72);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time for hobbies, per week", titleStartX, currentY+82);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Time for hobbies (satisfaction)", titleStartX, currentY+92);
 
  //value background
-  valueRectWidth = 120;
+  valueRectWidth = 110;
   gradX1 = 150;
   gradX2 = 270;
   doc.fillOpacity(0.2).rect(gradX1, currentY+10, valueRectWidth, 10).fillAndStroke("gray", "white");
-  doc.fillOpacity(0.2).rect(gradX1, currentY+20, valueRectWidth, 10).fillAndStroke("gray", "white");
-  doc.fillOpacity(0.2).rect(gradX1, currentY+30, valueRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+20, valueRectWidth, 20).fillAndStroke("gray", "white");
   doc.fillOpacity(0.2).rect(gradX1, currentY+40, valueRectWidth, 10).fillAndStroke("gray", "white");
-  doc.fillOpacity(0.2).rect(gradX1, currentY+50, valueRectWidth, 10).fillAndStroke("gray", "white");
-  doc.fillOpacity(0.2).rect(gradX1, currentY+60, valueRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+50, valueRectWidth, 20).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+70, valueRectWidth, 10).fillAndStroke("gray", "white");
+  doc.fillOpacity(0.2).rect(gradX1, currentY+80, valueRectWidth, 10).fillAndStroke("gray", "white");
   let grad8 = doc.linearGradient(gradX1, currentY, gradX2, currentY);
   grad8.stop(0, 'red').stop(0.5, 'yellow').stop(1, 'green');
-  doc.fillOpacity(0.3).rect(gradX1, currentY+73, valueRectWidth, 5).fill(grad8);
+  doc.fillOpacity(0.3).rect(gradX1, currentY+93, valueRectWidth, 5).fill(grad8);
 
    //value text or value
    doc.fontSize(6).fillOpacity(1);
    doc.fillColor("gray").text(req.body.personal2, gradX1+2, currentY+13);
-   doc.fillColor("gray").text(req.body.personal3, gradX1+2, currentY+23);
-   doc.fillColor("gray").text(req.body.personal8, gradX1+2, currentY+33);
-   doc.fillColor("gray").text(req.body.personal6, gradX1+2, currentY+43);
-   doc.fillColor("gray").text(req.body.personal7, gradX1+2, currentY+53);
-   doc.fillColor("gray").text(req.body.personal5, gradX1+2, currentY+63);
+   doc.fillColor("gray").text(req.body.personal3, gradX1+2, currentY+23, {width: 108});
+   doc.fillColor("gray").text(req.body.personal8, gradX1+2, currentY+43);
+   doc.fillColor("gray").text(req.body.personal6, gradX1+2, currentY+53, {width: 108});
+   doc.fillColor("gray").text(req.body.personal7, gradX1+2, currentY+73);
+   doc.fillColor("gray").text(req.body.personal5, gradX1+2, currentY+83);
  
    let timeHobbiesSatisfaction = req.body.personal4;
    valueStep = valueRectWidth/10;
-   doc.rect(gradX1 + valueStep*timeHobbiesSatisfaction, currentY + 71, valueSignWidth, valueSightHeight).fill('gray');
+   doc.rect(gradX1 + valueStep*timeHobbiesSatisfaction, currentY + 91, valueSignWidth, valueSightHeight).fill('gray');
 
    doc.fillOpacity(1).fontSize(7).fillColor("gray")
-   .text(req.body.personal9, textColumnX+20, currentY+10, {align: 'justify', width: 290});
+   .text(req.body.personal9, textColumnX+15, currentY+8, {align: 'justify', width: 295});
 
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
   currentY = 525;
   // FUN SECTION START
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight).fillOpacity(0.4).fill("gray");
-  doc.fontSize(12).fillOpacity(1).fillColor('white').text("FUN AND RECREATION", 210, currentY + 10);
+  doc.fontSize(12).fillOpacity(1).fillColor('white').text("FUN AND RECREATION", 210, currentY + 5);
 
-  currentY = 555;
+  currentY = 550;
   //gray boxed
   grayBoxWidth = 100;
   doc.rect(x0, currentY+10, grayBoxWidth, 10).fillAndStroke("gray", "white");
   doc.rect(x0, currentY+20, grayBoxWidth, 20).fillAndStroke("gray", "white");
   doc.rect(x0, currentY+40, grayBoxWidth, 20).fillAndStroke("gray", "white");
   doc.rect(x0, currentY+60, grayBoxWidth, 20).fillAndStroke("gray", "white");
-  doc.rect(x0, currentY+80, grayBoxWidth, 20).fillAndStroke("gray", "white");
-  doc.rect(x0, currentY+100, grayBoxWidth, 10).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+80, grayBoxWidth, 25).fillAndStroke("gray", "white");
+  doc.rect(x0, currentY+105, grayBoxWidth, 10).fillAndStroke("gray", "white");
 
   //titles on gray background
-  // TODO: rename titles
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Travel frequency", titleStartX, currentY+13);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("This year I saw/visited/experienced", titleStartX, currentY+23);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Amusements (rename)", titleStartX, currentY+43);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Next year I plan to see/try/visit", titleStartX, currentY+63);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("I spend free time:", titleStartX, currentY+83);
-  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Fun is scheduled in routine", titleStartX, currentY+103);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Travel frequency", titleStartX, currentY+12);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("This year I saw/visited/experienced", titleStartX, currentY+22);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Amusements (rename)", titleStartX, currentY+42);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Next year I plan to see/try/visit", titleStartX, currentY+62);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("I spend free time:", titleStartX, currentY+82);
+  doc.fontSize(6).fillColor("white").fillOpacity(1).text("Fun is scheduled in routine", titleStartX, currentY+107);
 
    //value background
    valueRectWidth = 120;
@@ -820,19 +828,20 @@ router.post('/', function(req, res, next) {
    doc.fillOpacity(0.2).rect(gradX1, currentY+20, valueRectWidth, 20).fillAndStroke("gray", "white");
    doc.fillOpacity(0.2).rect(gradX1, currentY+40, valueRectWidth, 20).fillAndStroke("gray", "white");
    doc.fillOpacity(0.2).rect(gradX1, currentY+60, valueRectWidth, 20).fillAndStroke("gray", "white");
-   doc.fillOpacity(0.2).rect(gradX1, currentY+80, valueRectWidth, 20).fillAndStroke("gray", "white");
+   doc.fillOpacity(0.2).rect(gradX1, currentY+80, valueRectWidth, 25).fillAndStroke("gray", "white");
+   doc.fillOpacity(0.2).rect(gradX1, currentY+105, valueRectWidth, 10).fillAndStroke("gray", "white");
  
    //value text or value
    doc.fontSize(6).fillOpacity(1);
-   doc.fillColor("gray").text(req.body.fun2, gradX1+2, currentY+13);
-   doc.fillColor("gray").text(req.body.fun3, gradX1+2, currentY+23, {align: 'justify', width: 116});
-   doc.fillColor("gray").text(req.body.fun31, gradX1+2, currentY+43, {align: 'justify', width: 116});
-   doc.fillColor("gray").text(req.body.fun4, gradX1+2, currentY+63, {align: 'justify', width: 116});
-   doc.fillColor("gray").text(req.body.fun5, gradX1+2, currentY+83, {align: 'justify', width: 116});
+   doc.fillColor("gray").text("~ " + req.body.fun2 + " times per year", gradX1+2, currentY+12);
+   doc.fillColor("gray").text(req.body.fun3, gradX1+2, currentY+22, {align: 'justify', width: 116});
+   doc.fillColor("gray").text(req.body.fun31, gradX1+2, currentY+42, {align: 'justify', width: 116});
+   doc.fillColor("gray").text(req.body.fun4, gradX1+2, currentY+62, {align: 'justify', width: 116});
+   doc.fillColor("gray").text(req.body.fun5, gradX1+2, currentY+82, {align: 'justify', width: 116});
    if (req.body.funincluded === 'Yes') {
-      doc.fillOpacity(0.4).circle(gradX1 + 6, currentY + 105, 4).fill("green");
+      doc.fillOpacity(0.4).circle(gradX1 + 6, currentY + 110, 4).fill("green");
    } else {  
-      doc.fillOpacity(0.4).circle(gradX1 + 6, currentY + 105, 4).fill("red");
+      doc.fillOpacity(0.4).circle(gradX1 + 6, currentY + 110, 4).fill("red");
    } 
    doc.fillOpacity(1).fontSize(7).fillColor("gray")
    .text(req.body.fun8, textColumnX+20, currentY+10, {align: 'justify', width: 290});
@@ -842,7 +851,7 @@ router.post('/', function(req, res, next) {
   currentY = 670;
   // FUTURE ME SECTION START
   doc.rect(0, currentY, titleBoxWidth, titleBoxHeight).fillOpacity(0.4).fill("gray");
-  doc.fontSize(12).fillOpacity(1).fillColor('white').text("FUTURE " + req.body.name , 230, currentY + 10);
+  doc.fontSize(12).fillOpacity(1).fillColor('white').text("FUTURE " + req.body.name.toUpperCase() , 230, currentY + 5);
 
   doc.fillOpacity(1).fontSize(6).fillColor("gray")
   .text(req.body.futureyou, x0, currentY+35, {align: 'justify', width: 530});
